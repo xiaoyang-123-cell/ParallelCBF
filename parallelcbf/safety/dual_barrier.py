@@ -168,9 +168,9 @@ class NaiveDistanceCBF(SafetyFilter[ArrayF32, ArrayF32]):
 
         for x_value in (-limit, limit):
             for y_value in (-limit, limit):
-                candidate = cast(ArrayF32, np.array([x_value, y_value], dtype=np.float32))
-                if float(np.dot(normal, candidate)) >= target - 1.0e-6:
-                    candidates.append(candidate)
+                corner_candidate = cast(ArrayF32, np.array([x_value, y_value], dtype=np.float32))
+                if float(np.dot(normal, corner_candidate)) >= target - 1.0e-6:
+                    candidates.append(corner_candidate)
 
         if not candidates:
             best_effort = limit * np.sign(normal)
