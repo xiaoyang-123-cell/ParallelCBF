@@ -10,10 +10,40 @@ from __future__ import annotations
 
 import argparse
 import os
+from collections import Counter
 from pathlib import Path
 from typing import Any
 
 import torch
+
+
+ATTEMPT_MIX = {
+    "open": 0.18,
+    "single_static": 0.36,
+    "multi_obstacle": 0.26,
+    "dynamic_obstacle": 0.20,
+}
+SCENE_KEY_ALIASES = {
+    "open": "open",
+    "open_space": "open",
+    "single_static": "single_static",
+    "single_obstacle": "single_static",
+    "multi_obstacle": "multi_obstacle",
+    "multi_obstacle_maze": "multi_obstacle",
+    "dynamic_obstacle": "dynamic_obstacle",
+}
+
+
+def canonical_scene_key(scene: object) -> str:
+    key = str(scene)
+    if key not in SCENE_KEY_ALIASES:
+        raise KeyError(f"Unknown scene key: {key}")
+    return SCENE_KEY_ALIASES[key]
+
+
+def normalized(counter: Counter[str]) -> dict[str, float]:
+    total = float(max(sum(counter.values()), 1))
+    return {scene: float(counter.get(scene, 0)) / total for scene in ATTEMPT_MIX}
 
 
 def atomic_torch_save(payload: dict[str, Any], output_path: Path) -> None:
@@ -58,12 +88,18 @@ def aggregate(shard_paths: list[Path], output_path: Path) -> int:
 
     all_episodes: list[Any] = []
     shard_metadata: list[dict[str, Any]] = []
+    attempt_counter: Counter[str] = Counter()
     for shard_path in shard_paths:
         shard = load_shard(shard_path)
         episodes = shard["episodes"]
         metadata = shard["metadata"]
         all_episodes.extend(episodes)
         shard_metadata.append(metadata)
+        episodes_by_scene = metadata.get("episodes_by_scene", {})
+        if not isinstance(episodes_by_scene, dict) or not episodes_by_scene:
+            raise RuntimeError(f"{shard_path} metadata is missing episodes_by_scene")
+        for scene, count in episodes_by_scene.items():
+            attempt_counter[canonical_scene_key(scene)] += int(count)
 
     artifact = {
         "episodes": all_episodes,
@@ -71,6 +107,11 @@ def aggregate(shard_paths: list[Path], output_path: Path) -> int:
             "source": "v23_sharded_bc_rescue",
             "num_shards": len(shard_paths),
             "episodes_accepted": len(all_episodes),
+            "episodes_requested": int(sum(attempt_counter.values())),
+            "episodes_completed": int(sum(attempt_counter.values())),
+            "attempt_mix": dict(ATTEMPT_MIX),
+            "episodes_by_scene": dict(attempt_counter),
+            "attempt_distribution": normalized(attempt_counter),
             "shard_paths": [str(path) for path in shard_paths],
             "shards": shard_metadata,
         },
