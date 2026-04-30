@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+from typing import cast
 
 import numpy as np
 from numpy.typing import NDArray
@@ -64,13 +65,13 @@ class NaiveDistanceCBF(SafetyFilter[ArrayF32, ArrayF32]):
         """Project a 2D acceleration onto the one-step hard-safe set."""
 
         _ = observation
-        action = np.asarray(nominal_action, dtype=np.float32).reshape(2)
-        action = np.clip(action, -self.config.action_limit, self.config.action_limit).astype(np.float32)
-        pos = np.asarray(safety_state.position, dtype=np.float32).reshape(2)
-        vel = np.asarray(safety_state.velocity, dtype=np.float32).reshape(2)
-        obstacles = np.asarray(safety_state.obstacles, dtype=np.float32).reshape(-1, 2)
+        action = cast(ArrayF32, np.asarray(nominal_action, dtype=np.float32).reshape(2))
+        action = cast(ArrayF32, np.clip(action, -self.config.action_limit, self.config.action_limit).astype(np.float32))
+        pos = cast(ArrayF32, np.asarray(safety_state.position, dtype=np.float32).reshape(2))
+        vel = cast(ArrayF32, np.asarray(safety_state.velocity, dtype=np.float32).reshape(2))
+        obstacles = cast(ArrayF32, np.asarray(safety_state.obstacles, dtype=np.float32).reshape(-1, 2))
         hard_radius = float(safety_state.robot_radius + safety_state.obstacle_radius)
-        safe_action = action.copy()
+        safe_action: ArrayF32 = action.copy()
         modified = False
 
         for obstacle in obstacles:
@@ -167,7 +168,7 @@ class NaiveDistanceCBF(SafetyFilter[ArrayF32, ArrayF32]):
 
         for x_value in (-limit, limit):
             for y_value in (-limit, limit):
-                candidate = np.array([x_value, y_value], dtype=np.float32)
+                candidate = cast(ArrayF32, np.array([x_value, y_value], dtype=np.float32))
                 if float(np.dot(normal, candidate)) >= target - 1.0e-6:
                     candidates.append(candidate)
 

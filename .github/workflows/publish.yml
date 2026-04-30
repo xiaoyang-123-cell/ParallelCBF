@@ -1,0 +1,44 @@
+name: publish
+
+on:
+  push:
+    tags: ["v*.*.*"]
+  workflow_dispatch:
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+    environment:
+      name: pypi
+      url: https://pypi.org/p/parallelcbf
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Upgrade build tools
+        run: |
+          python -m pip install --upgrade pip build
+      - name: Build distributions
+        run: python -m build
+      - name: Verify wheel excludes internal scripts
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from zipfile import ZipFile
+
+          wheels = sorted(Path("dist").glob("*.whl"))
+          if len(wheels) != 1:
+              raise SystemExit(f"expected exactly one wheel, found {len(wheels)}")
+          with ZipFile(wheels[0]) as wheel:
+              script_entries = [name for name in wheel.namelist() if name.startswith("scripts/")]
+          if script_entries:
+              raise SystemExit(f"wheel unexpectedly contains scripts/: {script_entries}")
+          print(f"verified {wheels[0]} excludes scripts/")
+          PY
+      - name: Publish to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          password: ${{ secrets.PYPI_API_TOKEN }}

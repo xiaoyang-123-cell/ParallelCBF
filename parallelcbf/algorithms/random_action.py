@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from pathlib import Path
+from typing import cast
 
 import numpy as np
 from numpy.typing import NDArray
@@ -54,9 +55,9 @@ class RandomActionAlgorithm(Algorithm[ArrayF32, ArrayF32, None]):
         _ = observation
         _ = hidden_state
         if deterministic:
-            action = np.zeros((2,), dtype=np.float32)
+            action: ArrayF32 = np.zeros((2,), dtype=np.float32)
         else:
-            action = self._rng.uniform(low=-1.0, high=1.0, size=(2,)).astype(np.float32)
+            action = cast(ArrayF32, self._rng.uniform(low=-1.0, high=1.0, size=(2,)).astype(np.float32))
         return Prediction(action=action, hidden_state=None)
 
     def save(self, path: str | Path) -> None:

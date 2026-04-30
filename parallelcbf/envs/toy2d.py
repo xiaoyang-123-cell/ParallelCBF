@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import Any
+from typing import Any, cast
 
 import gymnasium as gym
 import numpy as np
@@ -51,10 +51,10 @@ class Toy2DAvoidanceEnv(SafeEnv[ArrayF32, ArrayF32]):
         )
         self._rng = np.random.default_rng()
         self._step_count = 0
-        self._pos = np.zeros((2,), dtype=np.float32)
-        self._vel = np.zeros((2,), dtype=np.float32)
-        self._goal = np.array([2.0, 0.0], dtype=np.float32)
-        self._obstacle = np.array([0.8, 0.0], dtype=np.float32)
+        self._pos: ArrayF32 = np.zeros((2,), dtype=np.float32)
+        self._vel: ArrayF32 = np.zeros((2,), dtype=np.float32)
+        self._goal: ArrayF32 = cast(ArrayF32, np.array([2.0, 0.0], dtype=np.float32))
+        self._obstacle: ArrayF32 = cast(ArrayF32, np.array([0.8, 0.0], dtype=np.float32))
         self._last_hard_violation = False
         self.last_observation = self._observation()
 
@@ -70,10 +70,10 @@ class Toy2DAvoidanceEnv(SafeEnv[ArrayF32, ArrayF32]):
         if seed is not None:
             self._rng = np.random.default_rng(seed)
         self._step_count = 0
-        self._pos = np.array([-2.0, 0.0], dtype=np.float32)
+        self._pos = cast(ArrayF32, np.array([-2.0, 0.0], dtype=np.float32))
         self._vel = np.zeros((2,), dtype=np.float32)
-        self._goal = np.array([2.0, 0.0], dtype=np.float32)
-        self._obstacle = np.array([0.4, 0.25], dtype=np.float32)
+        self._goal = cast(ArrayF32, np.array([2.0, 0.0], dtype=np.float32))
+        self._obstacle = cast(ArrayF32, np.array([0.4, 0.25], dtype=np.float32))
         self._last_hard_violation = False
         self.last_observation = self._observation()
         return self.last_observation, {"safety_metrics": dict(self.safety_metrics())}

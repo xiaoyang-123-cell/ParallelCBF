@@ -23,20 +23,21 @@ Mamba policies, and PPO training integrations are deferred to v0.2.
 
 | Capability | ParallelCBF | Isaac Lab | OmniSafe | safe-control-gym | CBFKit |
 | --- | --- | --- | --- | --- | --- |
-| Simulator-agnostic safety API | Yes | Partial | Partial | Partial | Partial |
-| Extends Gymnasium-style envs | Yes | Yes | Yes | Yes | No |
-| Composable safety wrapper | Yes | User code | User code | Partial | User code |
-| CBF safety-filter abstraction | Yes | User code | Partial | Partial | Yes |
-| PyTorch batched CBF reference | Yes | User code | No | No | No |
-| Strict broadcast-shape tests | Yes | User code | No | No | No |
-| Property tests for invariance | Yes | No | No | Partial | Partial |
-| CPU-only reference environment | Yes | No | Yes | Yes | No |
-| Parallel/vectorized toy fixture | Yes | Yes | Yes | Partial | No |
-| Watchdog registry | Yes | User code | Partial | No | No |
-| Failure-forensics rolling buffer | Yes | User code | No | No | No |
-| Atomic checkpoint helper | Yes | User code | Partial | No | No |
-| Pre-registration artifact commit | Yes | No | No | No | No |
-| MLOSS-oriented packaging/docs | In progress | Yes | Yes | Yes | Partial |
+| Simulator-agnostic safety API | ✅ | ❌ | ❌ | ❌ | ❌ |
+| Extends Gymnasium-style envs | ✅ | ✅ | ✅ | ✅ | ❌ |
+| Composable safety wrapper | ✅ | ❌ | ❌ | ❌ | ❌ |
+| CBF safety-filter abstraction | ✅ | ❌ | ❌ | ❌ | ✅ |
+| PyTorch batched CBF reference | ✅ | ❌ | ❌ | ❌ | ❌ |
+| Strict broadcast-shape tests | ✅ | ❌ | ❌ | ❌ | ❌ |
+| Property tests for invariance | ✅ | ❌ | ❌ | ❌ | ❌ |
+| CPU-only reference environment | ✅ | ❌ | ✅ | ✅ | ❌ |
+| Parallel/vectorized toy fixture | ✅ | ✅ | ✅ | ❌ | ❌ |
+| Watchdog registry | ✅ | ❌ | ❌ | ❌ | ❌ |
+| Failure-forensics rolling buffer | ✅ | ❌ | ❌ | ❌ | ❌ |
+| Atomic checkpoint helper | ✅ | ❌ | ❌ | ❌ | ❌ |
+| Pre-registration artifact commit | ✅ | ❌ | ❌ | ❌ | ❌ |
+| Dataset audit as plugin | ✅ | ❌ | ❌ | ❌ | ❌ |
+| MLOSS-oriented packaging/docs | ✅ | ✅ | ✅ | ✅ | ❌ |
 
 ## Installation
 
