@@ -1,0 +1,3 @@
+# Algorithms Reference
+
+::: parallelcbf.algorithms

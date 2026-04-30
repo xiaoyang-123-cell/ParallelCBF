@@ -1,0 +1,82 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "parallelcbf"
+version = "0.1.0"
+description = "Composable safety-filter interfaces for parallel robot learning."
+readme = "README.md"
+requires-python = ">=3.10,<3.14"
+license = "Apache-2.0"
+authors = [
+  {name = "Zilei Yang", email = "107552504876@stu.xju.edu.cn"},
+  {name = "Yuyin Ma"},
+]
+maintainers = [
+  {name = "Zilei Yang", email = "107552504876@stu.xju.edu.cn"},
+]
+keywords = ["control barrier functions", "safe reinforcement learning", "robot learning", "auditability"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Science/Research",
+  "License :: OSI Approved :: Apache Software License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = [
+  "gymnasium",
+  "numpy",
+  "pydantic",
+  "torch",
+]
+
+[project.urls]
+Homepage = "https://github.com/xiaoyang-123-cell/ParallelCBF"
+Repository = "https://github.com/xiaoyang-123-cell/ParallelCBF"
+Issues = "https://github.com/xiaoyang-123-cell/ParallelCBF/issues"
+
+[project.optional-dependencies]
+test = [
+  "hypothesis",
+  "mypy",
+  "pytest",
+  "pytest-cov",
+]
+docs = [
+  "mkdocs-material",
+  "mkdocstrings[python]",
+  "mkdocs-jupyter",
+]
+
+[tool.mypy]
+strict = true
+mypy_path = "stubs"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--strict-markers"
+
+[tool.coverage.run]
+branch = true
+source = ["parallelcbf"]
+
+[tool.coverage.report]
+show_missing = true
+fail_under = 70
+
+[tool.hatch.build.targets.wheel]
+packages = ["parallelcbf"]
+
+[tool.hatch.build.targets.sdist]
+exclude = [
+  "/scripts",
+  "/data",
+  "/run_logs",
+  "/logs",
+  "*.pt",
+  "*.pth",
+]

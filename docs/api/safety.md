@@ -1,0 +1,3 @@
+# Safety Reference
+
+::: parallelcbf.safety

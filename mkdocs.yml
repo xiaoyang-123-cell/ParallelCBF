@@ -1,0 +1,31 @@
+site_name: ParallelCBF
+site_description: Composable safety filters and auditability tools for parallel robot learning.
+repo_url: https://github.com/xiaoyang-123-cell/ParallelCBF
+theme:
+  name: material
+  features:
+    - navigation.sections
+    - content.code.copy
+plugins:
+  - search
+  - mkdocstrings:
+      handlers:
+        python:
+          options:
+            docstring_style: google
+            show_source: true
+markdown_extensions:
+  - admonition
+  - pymdownx.snippets
+  - pymdownx.superfences
+nav:
+  - Home: index.md
+  - Tutorials:
+      - Quickstart: tutorials/01_quickstart.ipynb
+      - Custom Safety Filter: tutorials/02_custom_safety_filter.ipynb
+      - Auditable Training: tutorials/03_auditable_training.ipynb
+  - API:
+      - API: api/api.md
+      - Safety: api/safety.md
+      - Algorithms: api/algorithms.md
+      - Ops: api/ops.md

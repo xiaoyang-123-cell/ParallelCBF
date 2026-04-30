@@ -1,0 +1,16 @@
+cff-version: 1.2.0
+title: ParallelCBF
+message: "If you use ParallelCBF, please cite this software."
+type: software
+authors:
+  - family-names: Yang
+    given-names: Zilei
+    affiliation: Xinjiang University
+    email: 107552504876@stu.xju.edu.cn
+  - family-names: Ma
+    given-names: Yuyin
+    affiliation: Xinjiang University
+repository-code: "https://github.com/xiaoyang-123-cell/ParallelCBF"
+license: Apache-2.0
+version: 0.1.0
+date-released: 2026-04-30

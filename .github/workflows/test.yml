@@ -1,0 +1,30 @@
+name: test
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  pytest-mypy:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.10", "3.11", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install package and test dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e ".[test]"
+      - name: Run pytest
+        env:
+          CUDA_VISIBLE_DEVICES: ""
+          PYTEST_DISABLE_PLUGIN_AUTOLOAD: "1"
+        run: pytest -p pytest_cov --cov=parallelcbf --cov-report=term-missing tests
+      - name: Run mypy
+        run: mypy --strict parallelcbf tests
