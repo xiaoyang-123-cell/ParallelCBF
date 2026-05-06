@@ -1,0 +1,69 @@
+{
+  "amendment_5_sha": "bec97d2e2672588a135b4df09b74386bf4596b44ff9c854c258765c2cf91b0e5",
+  "barrier_metric_keys": {
+    "h_arena": "h_arena_min",
+    "h_arena_stopping": "h_arena_stopping_min",
+    "h_hard": "h_hard_min",
+    "h_soft": "h_soft_min"
+  },
+  "checkpoint": "/data/uav_project/ParallelCBF/runs/v02_phase_aware_resume_20260503T083420Z/checkpoints/final.pt",
+  "cpu_only": true,
+  "created_at_utc": "2026-05-03T11:28:19.693863+00:00",
+  "env": {
+    "action_limit": 1.0,
+    "arena_radius": 3.0,
+    "dt": 0.05,
+    "goal_radius": 0.15,
+    "max_steps": 500,
+    "obstacle_radius": 0.35,
+    "robot_radius": 0.1
+  },
+  "episodes": {
+    "deterministic": 500,
+    "stochastic": 100,
+    "total": 600
+  },
+  "layer2_tolerance_threshold": -1e-05,
+  "optional_artifacts": {
+    "O-1": "125 single-static episodes compared against v0.1 Stage-0 0/0/125/0 metrics",
+    "O-2": "value calibration samples every 10th transition"
+  },
+  "output_dir": "/data/uav_project/ParallelCBF/runs/v25_eval_final_20260503T112819Z",
+  "r_pins": {
+    "R-1": "hidden state reset to model.initial_hidden_state(batch=1) at each episode start",
+    "R-2": {
+      "source": "Toy2DConfig.goal_radius",
+      "success_radius": 0.15
+    },
+    "R-3": "stochastic action seed = env_seed + 10000",
+    "R-4": [
+      "layer2_violation",
+      "collision",
+      "out_of_arena",
+      "success",
+      "timeout"
+    ],
+    "R-5": "stochastic seeds 500-599 pair to deterministic scene specs by seed % 500",
+    "R-6": "torch.set_num_threads(1), CPU-only, torch.use_deterministic_algorithms(True)",
+    "R-7v2": {
+      "numerical": "-1e-05 <= h_min < 0, log numerical_residuals.jsonl without halt",
+      "pass": "h_min >= 0",
+      "real": "h_min < -1e-05, write autopsy and exit 2"
+    }
+  },
+  "scene_arena_precondition": {
+    "arena_bounds_source": "inscribed_square",
+    "margin": 0.05,
+    "validator": "_validate_scene_within_arena",
+    "wide_scene_policy": "shrink start/goal coordinates into the Layer-2 envelope before evaluation"
+  },
+  "scene_names": [
+    "open",
+    "single_static",
+    "offset_single_static",
+    "near_goal_open",
+    "wide_single_static"
+  ],
+  "torch_deterministic_algorithms": true,
+  "torch_num_threads": 1
+}

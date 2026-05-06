@@ -3,6 +3,11 @@
 Composable safety filters, deterministic test fixtures, and auditability tools
 for parallel robot-learning pipelines.
 
+**v0.2 cycle complete: 2D ParallelCBF archive. See tags for the exact code
+state matching our arXiv preprint.** The v0.2 release keeps the full
+experiment-record audit trail in `experiment_records_log/`, including negative
+results, spec defects, amendment history, and KF-001 through KF-005 telemetry.
+
 While Isaac Lab provides massive parallel UAV simulation, OmniSafe and safe-control-gym provide constrained-RL benchmarks, and CBFKit provides control-barrier-function synthesis tooling, no existing framework unifies these capabilities for end-to-end safety-constrained training. ParallelCBF is the first framework to unify (i) tensor-parallel UAV environments, (ii) hard-gate CBF safety filters, (iii) sharded BC-to-RL pipelines, and (iv) first-class operational auditability — pre-registration, watchdog registries, failure forensics, and dataset audits as composable APIs rather than user-implemented scripts.
 
 ## Why ParallelCBF?

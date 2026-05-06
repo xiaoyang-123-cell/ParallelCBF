@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.1.1 - 2026-05-01
+
+- Changed pre-registration metric and artifact parsing to raise `ParseError`
+  on missing, non-numeric, or non-finite required fields instead of silently
+  treating malformed data as a failed comparison.
+- Added compatibility exports for `parallelcbf.ops.pre_registration`.
+- Added V25 Stage 0 evaluation tooling for the Transformer BC checkpoint.
+
 ## v0.1.0 - 2026-04-30
 
 - Added formal `SafeEnv`, `SafetyFilter`, `Algorithm`, and ops ABCs.

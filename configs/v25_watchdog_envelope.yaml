@@ -1,0 +1,87 @@
+{
+  "watchdogs": [
+    {
+      "name": "Train Loss Explosion",
+      "type": "threshold",
+      "metric": "train_loss",
+      "threshold": 1000000.0,
+      "when": "gt",
+      "severity": "HALT",
+      "active_phases": ["CRITIC_WARMUP", "FULL_PPO"]
+    },
+    {
+      "name": "Grad Norm Blowup",
+      "type": "threshold",
+      "metric": "grad_norm",
+      "threshold": 10000.0,
+      "when": "gt",
+      "severity": "HALT",
+      "active_phases": ["CRITIC_WARMUP", "FULL_PPO"]
+    },
+    {
+      "name": "Val Overfit",
+      "type": "threshold",
+      "metric": "val_overfit_ratio",
+      "threshold": 5.0,
+      "when": "gt",
+      "severity": "HALT",
+      "active_phases": ["CRITIC_WARMUP", "FULL_PPO"]
+    },
+    {
+      "name": "critic_warmup_did_not_converge",
+      "type": "sustained_phase",
+      "metric": "phase",
+      "value": 0,
+      "max_steps": 1500000,
+      "severity": "HALT",
+      "active_phases": ["CRITIC_WARMUP"]
+    },
+    {
+      "name": "value_loss_increasing_warmup",
+      "type": "threshold",
+      "metric": "value_loss_slope",
+      "threshold_slope": 0.001,
+      "when": "gt",
+      "severity": "WARN",
+      "active_phases": ["CRITIC_WARMUP"]
+    },
+    {
+      "name": "episode_return_zero_variance",
+      "type": "threshold",
+      "metric": "episode_return_zero_variance",
+      "threshold": 0.5,
+      "when": "gt",
+      "severity": "HALT",
+      "active_phases": ["CRITIC_WARMUP", "FULL_PPO"]
+    },
+    {
+      "name": "explained_variance_stuck_negative",
+      "type": "threshold",
+      "metric": "explained_variance_stuck_negative",
+      "threshold": 0.5,
+      "when": "gt",
+      "severity": "HALT",
+      "active_phases": ["CRITIC_WARMUP"]
+    },
+    {
+      "name": "explained_variance_dropping_full_ppo",
+      "type": "threshold",
+      "metric": "train/value_explained_variance",
+      "threshold": 0.5,
+      "when": "lt",
+      "severity": "HALT",
+      "sustained_for_steps": 200000,
+      "active_phases": ["FULL_PPO"]
+    },
+    {
+      "name": "arena_projection_saturation",
+      "type": "threshold",
+      "metric": "arena_projection_active_rate",
+      "threshold": 0.5,
+      "when": "gt",
+      "severity": "WARN",
+      "sustained_steps": 100000,
+      "active_phases": ["CRITIC_WARMUP", "FULL_PPO"]
+    }
+  ]
+}

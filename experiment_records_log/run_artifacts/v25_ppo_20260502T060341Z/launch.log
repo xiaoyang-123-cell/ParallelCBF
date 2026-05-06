@@ -1,0 +1,147 @@
+output_dir=/data/uav_project/ParallelCBF/runs/v25_ppo_20260502T060341Z
+tb_logdir=/data/uav_project/ParallelCBF/runs/v25_ppo_20260502T060341Z/tb
+pre_registration_manifest_sha256=4854bf0ac5e6645fc3ae5c8fff26d7607349bb26615b91dd297a9217746d5def
+bc_checkpoint_sha256=635017f6398af9b83ca898bf9660a275801e0c9c753a80b2d115353a1f365810
+wandb_project=parallelcbf-v0.2
+wandb_run_name=v25-ppo-10M-smartlab
+============================================================
+WATCHDOG REGISTRY (V25 PPO training):
+  - Train Loss Explosion: metric=train_loss, threshold=1000000.0, when=>
+  - Grad Norm Blowup: metric=grad_norm, threshold=10000.0, when=>
+  - Val Overfit: metric=val_overfit_ratio, threshold=5.0, when=>
+============================================================
+[INFO][V25] phase=0 (CRITIC_WARMUP) entered cleanly
+[INFO][AppLauncher]: Using device: cuda:0
+[INFO][AppLauncher]: Loading experience file: /data/IsaacLab/apps/isaaclab.python.headless.kit
+Loading user config located at: '/data/isaacsim/kit/data/Kit/Isaac-Sim/5.1/user.config.json'
+[Info] [carb] Logging to file: /data/isaacsim/kit/logs/Kit/Isaac-Sim/5.1/kit_20260502_140342.log
+2026-05-02T06:03:43Z [228ms] [Warning] [carb.cudainterop.plugin] CUDA_VISIBLE_DEVICES environment variable is set.
+2026-05-02T06:03:43Z [228ms] [Warning] [carb.cudainterop.plugin] Note CUDA device enumeration and Omniverse device enumeration are different.
+2026-05-02T06:03:43Z [228ms] [Warning] [carb.cudainterop.plugin] Setting CUDA_VISIBLE_DEVICES can lead to undesired behavior or crashes.
+
+|---------------------------------------------------------------------------------------------|
+| Driver Version: 580.142       | Graphics API: Vulkan
+|=============================================================================================|
+| GPU | Name                             | Active | LDA | GPU Memory | Vendor-ID | LUID       |
+|     |                                  |        |     |            | Device-ID | UUID       |
+|     |                                  |        |     |            | Bus-ID    |            |
+|---------------------------------------------------------------------------------------------|
+| 0   | NVIDIA GeForce RTX 3090          | Yes: 0 |     | 24822   MB | 10de      | 0          |
+|     |                                  |        |     |            | 2204      | be39c3a4.. |
+|     |                                  |        |     |            | 1         |            |
+|=============================================================================================|
+| OS: 22.04.5 LTS (Jammy Jellyfish) ubuntu, Version: 22.04.5, Kernel: 6.8.0-110-generic
+| XServer Vendor: The X.Org Foundation, XServer Version: 12101004 (1.21.1.4)
+| Processor: 13th Gen Intel(R) Core(TM) i7-13700KF
+| Cores: 16 | Logical Cores: 24
+|---------------------------------------------------------------------------------------------|
+| Total Memory (MB): 128622 | Free Memory: 122888
+| Total Page/Swap (MB): 62499 | Free Page/Swap: 62499
+|---------------------------------------------------------------------------------------------|
+2026-05-02T06:03:43Z [915ms] [Warning] [gpu.foundation.plugin] CPU performance profile is set to powersave. This profile sets the CPU to the lowest frequency reducing performance.
+2026-05-02T06:03:43Z [923ms] [Warning] [gpu.foundation.plugin] IOMMU is enabled.
+2026-05-02T06:03:44Z [1,559ms] [Warning] [carb] Acquiring non optional plugin interface which is not listed as dependency: [omni::physx::IPhysxBenchmarks v1.0] (plugin: <default plugin>), by client: omni.physics.physx.plugin. Add it to CARB_PLUGIN_IMPL_DEPS() macro of a client.
+2026-05-02T06:03:44Z [1,565ms] [Warning] [omni.isaac.dynamic_control] omni.isaac.dynamic_control is deprecated as of Isaac Sim 4.5. No action is needed from end-users.
+2026-05-02T06:03:44Z [1,797ms] [Warning] [omni.log] Source: omni.hydra was already registered.
+2026-05-02T06:03:45Z [2,936ms] [Warning] [pxr.Semantics] pxr.Semantics is deprecated - please use Semantics instead
+2026-05-02T06:03:45Z [2,997ms] [Warning] [omni.graph.core.plugin] Found duplicate of category 'Replicator' - was 'Annotators', adding 'Fabric Reader'
+2026-05-02T06:03:45Z [2,997ms] [Warning] [omni.graph.core.plugin] Category 'Replicator' not accepted on node type 'omni.replicator.core.FabricReader' in extension 'omni.replicator.core'
+2026-05-02T06:03:45Z [2,997ms] [Warning] [omni.replicator.core.scripts.extension] No material configuration file, adding configuration to material settings directly.
+2026-05-02T06:03:46Z [3,188ms] [Warning] [omni.graph.core._impl._registration.register_python_ogn] Python import process in omni.anim.graph.core failed - 'NoneType' object is not subscriptable. Aborting Python node registration
+2026-05-02T06:03:46Z [3,458ms] [Warning] [omni.stageupdate.plugin] Deprecated: direct use of IStageUpdate callbacks is deprecated. Use IStageUpdate::getStageUpdate instead.
+2026-05-02T06:03:46Z [3,539ms] [Warning] [omni.isaac.core.physics_context.physics_context] omni.isaac.core.physics_context.physics_context has been deprecated in favor of isaacsim.core.api.physics_context.physics_context. Please update your code accordingly.
+2026-05-02T06:03:46Z [3,539ms] [Warning] [omni.isaac.core.simulation_context.simulation_context] omni.isaac.core.simulation_context.simulation_context has been deprecated in favor of isaacsim.core.api.simulation_context.simulation_context. Please update your code accordingly.
+2026-05-02T06:03:46Z [3,539ms] [Warning] [omni.isaac.core.world.world] omni.isaac.core.world.world has been deprecated in favor of isaacsim.core.api.world.world. Please update your code accordingly.
+2026-05-02T06:03:46Z [3,539ms] [Warning] [omni.isaac.core] omni.isaac.core has been deprecated in favor of isaacsim.core.api. Please update your code accordingly.
+2026-05-02T06:03:47Z [4,798ms] [Warning] [pegasus.simulator.logic.backends.ardupilot_mavlink_backend] [ArduPilotMavlinkBackendConfig] Initialized with vehicle_id=0, connection_type=udpin, connection_ip=127.0.0.1, connection_baseport=14550, ardupilot_autolaunch=True, ardupilot_dir=/home/smartlab/ardupilot, ardupilot_vehicle_model=gazebo-iris, enable_lockstep=False, num_rotors=4, input_offset=[0.0, 0.0, 0.0, 0.0], input_scaling=[1000, 1000, 1000, 1000], zero_position_armed=[100, 100, 100, 100], update_rate=400
+2026-05-02T06:03:47Z [4,856ms] [Warning] [humble.rclpy] Could not import rclpy
+2026-05-02T06:03:47Z [4,862ms] [Warning] [pegasus.simulator.logic.backends] ROS2 package not installed. ROS2Backend will not be available
+2026-05-02T06:03:47Z [4,865ms] [Warning] [pegasus.simulator.ui.ui_delegate] ROS2 backend not available. Please install the ROS2 extension to use this feature.
+2026-05-02T06:03:49Z [6,750ms] [Warning] [omni.fabric.plugin] USD->Fabric: Unhandled array type string[]
+2026-05-02T06:03:49Z [6,756ms] [Warning] [omni.usd] Warning: in _AdapterLookup at line 283 of /builds/omniverse/usd-ci/USD/pxr/usdImaging/usdImaging/delegate.cpp -- Selected hydra renderer doesn't support prim type 'RenderSettings'
+
+[INFO] Logging experiment in directory: /data/uav_project/ParallelCBF/runs/v25_ppo_20260502T060341Z
+[INFO][V23] Constructing UAVSafeEnv...
+
+[36m======================================================================================[0m
+[36m[1m[INFO][IsaacLab]: Logging to file: /tmp/isaaclab/logs/isaaclab_2026-05-02_14-03-51.log[0m
+[36m======================================================================================[0m
+
+[33m14:03:51 [simulation_context.py] WARNING: The `enable_external_forces_every_iteration` parameter in the PhysxCfg is set to False. If you are experiencing noisy velocities, consider enabling this flag. You may need to slightly increase the number of velocity iterations (setting it to 1 or 2 rather than 0), together with this flag, to improve the accuracy of velocity updates.[0m
+[INFO]: Base environment:
+	Environment device    : cuda:0
+	Environment seed      : 20260502
+	Physics step-size     : 0.005
+	Rendering step-size   : 0.02
+	Environment step-size : 0.02
+2026-05-02T06:03:52Z [9,221ms] [Warning] [omni.fabric.plugin] Warning: input prim:attr `/World/envs/env_0:omni:rtx:skip` has no valid data.
+
+[INFO]: Time taken for scene creation : 0.788646 seconds
+[INFO]: Scene manager:  <class InteractiveScene>
+	Number of environments: 64
+	Environment spacing   : 5.0
+	Source prim name      : /World/envs/env_0
+	Global prim paths     : []
+	Replicate physics     : True
+[INFO]: Starting the simulation. This may take a few seconds. Please wait...
+2026-05-02T06:03:52Z [9,584ms] [Warning] [omni.hydra.scene_delegate.plugin] Calling setWorldMatrix for prim /World/envs/env_62/Robot/body/body_visual that has not been populated
+2026-05-02T06:03:52Z [9,585ms] [Warning] [omni.hydra.scene_delegate.plugin] Calling setVisibility for prim /World/envs/env_1/Robot/m4_prop/cw_prop that has not been populated
+[INFO]: Time taken for simulation start : 0.871438 seconds
+[INFO] Event Manager:  <EventManager> contains 1 active terms.
++--------------------------------------+
+| Active Event Terms in Mode: 'reset'  |
++---------+----------------------------+
+|  Index  | Name                       |
++---------+----------------------------+
+|    0    | randomize_uav_physics      |
++---------+----------------------------+
+
+[INFO]: Completed setting up the environment...
+======================================================================
+[CONFIG VERIFICATION]
+  cbf_enabled         : True
+  num_actions         : 3
+  num_observations    : 26
+  expected_action_dim : 3
+======================================================================
+[INFO][V23] UAVSafeEnv constructed.
+[INFO][V23] Wrapping env with RslRlVecEnvWrapper...
+[INFO][V23] RslRlVecEnvWrapper ready.
+[INFO][V24] Phase alpha calibration: steps_per_iteration=2048, warmup_floor_steps=500000, warmup_cap_steps=750000, actor_freeze_cap_iterations=367, kl_hold_until_iter=245, kl_decay_until_iter=1465
+[INFO][V23] Constructing EntropyAwareOnPolicyRunner...
+--------------------------------------------------------------------------------
+Resolved observation sets: 
+	 actor :  ['policy']
+	 critic :  ['policy']
+--------------------------------------------------------------------------------
+Actor Model: RNNModel(
+  (obs_normalizer): EmpiricalNormalization()
+  (distribution): GaussianDistribution()
+  (mlp): MLP(
+    (0): Linear(in_features=128, out_features=64, bias=True)
+    (1): ELU(alpha=1.0)
+    (2): Linear(in_features=64, out_features=3, bias=True)
+  )
+  (rnn): RNN(
+    (rnn): GRU(26, 128)
+  )
+)
+Critic Model: RNNModel(
+  (obs_normalizer): EmpiricalNormalization()
+  (mlp): MLP(
+    (0): Linear(in_features=128, out_features=64, bias=True)
+    (1): ELU(alpha=1.0)
+    (2): Linear(in_features=64, out_features=1, bias=True)
+  )
+  (rnn): RNN(
+    (rnn): GRU(26, 128)
+  )
+)
+[INFO][V23] EntropyAwareOnPolicyRunner ready.
+Policy class: RNNModel
+Policy source: runner.alg.get_policy() (runner.alg.actor_critic is not present)
+Distribution attrs containing 'std' or 'log':
+  ['log_prob', 'log_std_param', 'std', 'std_type']
+Resolved log_std parameter: distribution.log_std_param
+[INFO] Loading V22.6 BC actor warm-start from: /data/uav_project/ParallelCBF/checkpoints/v25_transformer_bc_full/best.pt
+2026-05-02T06:03:54Z [11,841ms] [Warning] [omni.usd] Unexpected reference count of 3 for UsdStage 'anon:0x644e43185350:World0.usd' while being closed in UsdContext (this may indicate it is still resident in memory).

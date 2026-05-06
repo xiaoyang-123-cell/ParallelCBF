@@ -1,0 +1,95 @@
+output_dir=/data/uav_project/ParallelCBF/runs/v02_attempt6_pbrs_diag_20260503T133731Z
+tb_logdir=/data/uav_project/ParallelCBF/runs/v02_attempt6_pbrs_diag_20260503T133731Z/tb
+pre_registration_manifest_sha256=66fec1edd75189c515b82d36668591665ecb68cca20b0744e5ec5c3f91d71df2
+bc_checkpoint_sha256=40c70226bbae24e2bce4c00878fd31173337fb4e411b7f45107a71198f5719e0
+bc_dataset_sha256=50e59d2f7886dcc00f3c2405ae449cdbaa879b1b5be79b7dcd2993ce65bb5145
+============================================================
+WATCHDOG REGISTRY (V25 PPO training):
+  - Train Loss Explosion: metric=train_loss, threshold=1000000.0, when=>, phases=ppo,critic_warmup
+  - Grad Norm Blowup: metric=grad_norm, threshold=10000.0, when=>, phases=ppo,critic_warmup
+  - Val Overfit: metric=val_overfit_ratio, threshold=5.0, when=>, phases=ppo,critic_warmup
+  - critic_warmup_did_not_converge: metric=phase, threshold=1500000, when=sustained_phase, phases=critic_warmup
+  - value_loss_increasing_warmup: metric=value_loss_slope, threshold=0.001, when=>, phases=critic_warmup
+  - episode_return_zero_variance: metric=episode_return_zero_variance, threshold=0.5, when=>, phases=ppo,critic_warmup
+  - explained_variance_stuck_negative: metric=explained_variance_stuck_negative, threshold=0.5, when=>, phases=critic_warmup
+  - explained_variance_dropping_full_ppo: metric=train/value_explained_variance, threshold=0.5, when=<, phases=ppo
+  - arena_projection_saturation: metric=arena_projection_active_rate, threshold=0.5, when=>, phases=ppo,critic_warmup
+============================================================
+[INFO][V25] phase=0 (CRITIC_WARMUP) entered cleanly
+loaded_actor_parameters=3167235
+[INFO][V25] algo.learn entry reached
+wandb: WARNING The anonymous setting has no effect and will be removed in a future version.
+wandb: Tracking run with wandb version 0.26.1
+wandb: W&B syncing is set to `offline` in this directory. Run `wandb online` or set WANDB_MODE=online to enable cloud syncing.
+wandb: Run data is saved locally in /data/uav_project/ParallelCBF/runs/v02_attempt6_pbrs_diag_20260503T133731Z/wandb/wandb/offline-run-20260503_213734-emp9gq0j
+wandb: WARNING URL not available in offline run
+wandb_status=initialized mode=offline url=unavailable
+tensorboard_status=initialized logdir=/data/uav_project/ParallelCBF/runs/v02_attempt6_pbrs_diag_20260503T133731Z/tb
+[V25 PPO] phase=0 rollout/transitions=4096 safety/h_hard_min=4.92418 train/value_loss=1492.53 train/value_explained_variance=0.00380266 train/approx_kl=0 train/clip_epsilon=0.05 train/actor_lr=0 train/post_transition_steps=0 rollout/episode_return_std=nan rollout/potential_delta_std=0.0246332 rollout/shaping_reward_share=0.0206393 train/grad_norm=414.864
+[V25 PPO] phase=0 rollout/transitions=8192 safety/h_hard_min=6.26228 train/value_loss=879.593 train/value_explained_variance=-0.000523925 train/approx_kl=0 train/clip_epsilon=0.05 train/actor_lr=0 train/post_transition_steps=0 rollout/episode_return_std=nan rollout/potential_delta_std=0.00193474 rollout/shaping_reward_share=0.0117081 train/grad_norm=345.748
+[V25 PPO] phase=0 rollout/transitions=12288 safety/h_hard_min=6.26228 train/value_loss=851.852 train/value_explained_variance=-5.79357e-05 train/approx_kl=0 train/clip_epsilon=0.05 train/actor_lr=0 train/post_transition_steps=0 rollout/episode_return_std=nan rollout/potential_delta_std=0 rollout/shaping_reward_share=0.0121402 train/grad_norm=350.174
+[V25 PPO] phase=0 rollout/transitions=16384 safety/h_hard_min=6.26228 train/value_loss=815.64 train/value_explained_variance=-2.38419e-07 train/approx_kl=0 train/clip_epsilon=0.05 train/actor_lr=0 train/post_transition_steps=0 rollout/episode_return_std=nan rollout/potential_delta_std=0 rollout/shaping_reward_share=0.0121402 train/grad_norm=342.016
+[V25 PPO] phase=0 rollout/transitions=20480 safety/h_hard_min=6.26228 train/value_loss=839.847 train/value_explained_variance=-1.19209e-07 train/approx_kl=0 train/clip_epsilon=0.05 train/actor_lr=0 train/post_transition_steps=0 rollout/episode_return_std=nan rollout/potential_delta_std=0 rollout/shaping_reward_share=0.0121402 train/grad_norm=349.89
+[V25 PPO] phase=0 rollout/transitions=24576 safety/h_hard_min=6.26228 train/value_loss=835.277 train/value_explained_variance=-2.38419e-07 train/approx_kl=0 train/clip_epsilon=0.05 train/actor_lr=0 train/post_transition_steps=0 rollout/episode_return_std=nan rollout/potential_delta_std=0 rollout/shaping_reward_share=0.0121401 train/grad_norm=347.148
+[V25 PPO] phase=0 rollout/transitions=28672 safety/h_hard_min=6.26228 train/value_loss=807.483 train/value_explained_variance=0 train/approx_kl=0 train/clip_epsilon=0.05 train/actor_lr=0 train/post_transition_steps=0 rollout/episode_return_std=nan rollout/potential_delta_std=0 rollout/shaping_reward_share=0.0121402 train/grad_norm=337.45
+[V25 PPO] phase=0 rollout/transitions=32768 safety/h_hard_min=4.80856 train/value_loss=680.1 train/value_explained_variance=0.0148178 train/approx_kl=0 train/clip_epsilon=0.05 train/actor_lr=0 train/post_transition_steps=0 rollout/episode_return_std=0.0955428 rollout/potential_delta_std=0.0199801 rollout/shaping_reward_share=0.0144039 train/grad_norm=294.25
+[V25 PPO] phase=0 rollout/transitions=36864 safety/h_hard_min=5.98099 train/value_loss=1233.33 train/value_explained_variance=-0.0292498 train/approx_kl=0 train/clip_epsilon=0.05 train/actor_lr=0 train/post_transition_steps=0 rollout/episode_return_std=nan rollout/potential_delta_std=0.0270173 rollout/shaping_reward_share=0.0191671 train/grad_norm=385.206
+[V25 PPO] phase=0 rollout/transitions=40960 safety/h_hard_min=6.26228 train/value_loss=828.84 train/value_explained_variance=-0.00187147 train/approx_kl=0 train/clip_epsilon=0.05 train/actor_lr=0 train/post_transition_steps=0 rollout/episode_return_std=nan rollout/potential_delta_std=0.000300841 rollout/shaping_reward_share=0.0121101 train/grad_norm=341.277
+[V25 PPO] phase=0 rollout/transitions=45056 safety/h_hard_min=6.26228 train/value_loss=790.134 train/value_explained_variance=-2.32458e-05 train/approx_kl=0 train/clip_epsilon=0.05 train/actor_lr=0 train/post_transition_steps=0 rollout/episode_return_std=nan rollout/potential_delta_std=0 rollout/shaping_reward_share=0.0121402 train/grad_norm=336.546
+[V25 PPO] phase=0 rollout/transitions=49152 safety/h_hard_min=6.26228 train/value_loss=830.899 train/value_explained_variance=-1.19209e-07 train/approx_kl=0 train/clip_epsilon=0.05 train/actor_lr=0 train/post_transition_steps=0 rollout/episode_return_std=nan rollout/potential_delta_std=0 rollout/shaping_reward_share=0.0121402 train/grad_norm=344.68
+[V25 PPO] phase=0 rollout/transitions=53248 safety/h_hard_min=6.26228 train/value_loss=810.923 train/value_explained_variance=1.19209e-07 train/approx_kl=0 train/clip_epsilon=0.05 train/actor_lr=0 train/post_transition_steps=0 rollout/episode_return_std=nan rollout/potential_delta_std=0 rollout/shaping_reward_share=0.0121402 train/grad_norm=343.578
+[V25 PPO] phase=0 rollout/transitions=57344 safety/h_hard_min=6.26228 train/value_loss=793.36 train/value_explained_variance=5.96046e-08 train/approx_kl=0 train/clip_epsilon=0.05 train/actor_lr=0 train/post_transition_steps=0 rollout/episode_return_std=nan rollout/potential_delta_std=0 rollout/shaping_reward_share=0.0121402 train/grad_norm=335.107
+[V25 PPO] phase=0 rollout/transitions=61440 safety/h_hard_min=6.26228 train/value_loss=761.983 train/value_explained_variance=0 train/approx_kl=0 train/clip_epsilon=0.05 train/actor_lr=0 train/post_transition_steps=0 rollout/episode_return_std=nan rollout/potential_delta_std=0 rollout/shaping_reward_share=0.0121402 train/grad_norm=325.995
+[V25 PPO] phase=0 rollout/transitions=65536 safety/h_hard_min=3.01674 train/value_loss=750.066 train/value_explained_variance=-0.0441738 train/approx_kl=0 train/clip_epsilon=0.05 train/actor_lr=0 train/post_transition_steps=0 rollout/episode_return_std=0.107574 rollout/potential_delta_std=0.0273902 rollout/shaping_reward_share=0.0172243 train/grad_norm=280.508
+[V25 PPO] phase=0 rollout/transitions=69632 safety/h_hard_min=6.26228 train/value_loss=1058.26 train/value_explained_variance=-0.101275 train/approx_kl=0 train/clip_epsilon=0.05 train/actor_lr=0 train/post_transition_steps=0 rollout/episode_return_std=nan rollout/potential_delta_std=0.0224145 rollout/shaping_reward_share=0.0165251 train/grad_norm=354.459
+[V25 PPO] phase=0 rollout/transitions=73728 safety/h_hard_min=6.26228 train/value_loss=774.823 train/value_explained_variance=-0.00103736 train/approx_kl=0 train/clip_epsilon=0.05 train/actor_lr=0 train/post_transition_steps=0 rollout/episode_return_std=nan rollout/potential_delta_std=0 rollout/shaping_reward_share=0.0121328 train/grad_norm=330.441
+[V25 PPO] phase=0 rollout/transitions=77824 safety/h_hard_min=6.26228 train/value_loss=774.384 train/value_explained_variance=0 train/approx_kl=0 train/clip_epsilon=0.05 train/actor_lr=0 train/post_transition_steps=0 rollout/episode_return_std=nan rollout/potential_delta_std=0 rollout/shaping_reward_share=0.0121401 train/grad_norm=333.378
+[V25 PPO] phase=0 rollout/transitions=81920 safety/h_hard_min=6.26228 train/value_loss=823.901 train/value_explained_variance=0 train/approx_kl=0 train/clip_epsilon=0.05 train/actor_lr=0 train/post_transition_steps=0 rollout/episode_return_std=nan rollout/potential_delta_std=0 rollout/shaping_reward_share=0.0121402 train/grad_norm=345.367
+[V25 PPO] phase=0 rollout/transitions=86016 safety/h_hard_min=6.26228 train/value_loss=772.505 train/value_explained_variance=-1.19209e-07 train/approx_kl=0 train/clip_epsilon=0.05 train/actor_lr=0 train/post_transition_steps=0 rollout/episode_return_std=nan rollout/potential_delta_std=0 rollout/shaping_reward_share=0.0121402 train/grad_norm=333.071
+[V25 PPO] phase=0 rollout/transitions=90112 safety/h_hard_min=6.26228 train/value_loss=792.88 train/value_explained_variance=0 train/approx_kl=0 train/clip_epsilon=0.05 train/actor_lr=0 train/post_transition_steps=0 rollout/episode_return_std=nan rollout/potential_delta_std=0 rollout/shaping_reward_share=0.0121402 train/grad_norm=338.099
+[V25 PPO] phase=0 rollout/transitions=94208 safety/h_hard_min=6.26228 train/value_loss=761.628 train/value_explained_variance=1.19209e-07 train/approx_kl=0 train/clip_epsilon=0.05 train/actor_lr=0 train/post_transition_steps=0 rollout/episode_return_std=nan rollout/potential_delta_std=0 rollout/shaping_reward_share=0.0121401 train/grad_norm=328.962
+[V25 PPO] phase=0 rollout/transitions=98304 safety/h_hard_min=2.02064 train/value_loss=1046.48 train/value_explained_variance=-0.0842079 train/approx_kl=0 train/clip_epsilon=0.05 train/actor_lr=0 train/post_transition_steps=0 rollout/episode_return_std=0.111734 rollout/potential_delta_std=0.0270875 rollout/shaping_reward_share=0.0193069 train/grad_norm=327.829
+[V25 PPO] phase=0 rollout/transitions=102400 safety/h_hard_min=6.26228 train/value_loss=877.282 train/value_explained_variance=-0.158677 train/approx_kl=0 train/clip_epsilon=0.05 train/actor_lr=0 train/post_transition_steps=0 rollout/episode_return_std=nan rollout/potential_delta_std=0.0155993 rollout/shaping_reward_share=0.0138448 train/grad_norm=322.126
+[V25 PPO] phase=0 rollout/transitions=106496 safety/h_hard_min=6.26228 train/value_loss=743.693 train/value_explained_variance=-0.00267243 train/approx_kl=0 train/clip_epsilon=0.05 train/actor_lr=0 train/post_transition_steps=0 rollout/episode_return_std=nan rollout/potential_delta_std=0 rollout/shaping_reward_share=0.0121361 train/grad_norm=325.405
+[V25 PPO] phase=0 rollout/transitions=110592 safety/h_hard_min=6.26228 train/value_loss=735.856 train/value_explained_variance=1.19209e-07 train/approx_kl=0 train/clip_epsilon=0.05 train/actor_lr=0 train/post_transition_steps=0 rollout/episode_return_std=nan rollout/potential_delta_std=0 rollout/shaping_reward_share=0.0121401 train/grad_norm=324.316
+[V25 PPO] phase=0 rollout/transitions=114688 safety/h_hard_min=6.26228 train/value_loss=726.845 train/value_explained_variance=0 train/approx_kl=0 train/clip_epsilon=0.05 train/actor_lr=0 train/post_transition_steps=0 rollout/episode_return_std=nan rollout/potential_delta_std=0 rollout/shaping_reward_share=0.0121401 train/grad_norm=322.319
+[V25 PPO] phase=0 rollout/transitions=118784 safety/h_hard_min=6.26228 train/value_loss=748.15 train/value_explained_variance=0 train/approx_kl=0 train/clip_epsilon=0.05 train/actor_lr=0 train/post_transition_steps=0 rollout/episode_return_std=nan rollout/potential_delta_std=0 rollout/shaping_reward_share=0.0121402 train/grad_norm=326.236
+[V25 PPO] phase=0 rollout/transitions=122880 safety/h_hard_min=6.26228 train/value_loss=774.768 train/value_explained_variance=-1.19209e-07 train/approx_kl=0 train/clip_epsilon=0.05 train/actor_lr=0 train/post_transition_steps=0 rollout/episode_return_std=nan rollout/potential_delta_std=0 rollout/shaping_reward_share=0.0121401 train/grad_norm=338.685
+[V25 PPO] phase=0 rollout/transitions=126976 safety/h_hard_min=6.26228 train/value_loss=756.146 train/value_explained_variance=-1.19209e-07 train/approx_kl=0 train/clip_epsilon=0.05 train/actor_lr=0 train/post_transition_steps=0 rollout/episode_return_std=nan rollout/potential_delta_std=0 rollout/shaping_reward_share=0.0121402 train/grad_norm=330.202
+[V25 PPO] phase=0 rollout/transitions=131072 safety/h_hard_min=2.6665 train/value_loss=1145.69 train/value_explained_variance=-0.130998 train/approx_kl=0 train/clip_epsilon=0.05 train/actor_lr=0 train/post_transition_steps=0 rollout/episode_return_std=0.114376 rollout/potential_delta_std=0.0248063 rollout/shaping_reward_share=0.0206127 train/grad_norm=340.554
+[V25 PPO] phase=0 rollout/transitions=135168 safety/h_hard_min=6.26228 train/value_loss=812.981 train/value_explained_variance=-0.174179 train/approx_kl=0 train/clip_epsilon=0.05 train/actor_lr=0 train/post_transition_steps=0 rollout/episode_return_std=nan rollout/potential_delta_std=0.00357864 rollout/shaping_reward_share=0.0118289 train/grad_norm=315.704
+[V25 PPO] phase=0 rollout/transitions=139264 safety/h_hard_min=6.26228 train/value_loss=775.822 train/value_explained_variance=-0.00402761 train/approx_kl=0 train/clip_epsilon=0.05 train/actor_lr=0 train/post_transition_steps=0 rollout/episode_return_std=nan rollout/potential_delta_std=0 rollout/shaping_reward_share=0.0121388 train/grad_norm=335.139
+[V25 PPO] phase=0 rollout/transitions=143360 safety/h_hard_min=6.26228 train/value_loss=723.433 train/value_explained_variance=-2.38419e-07 train/approx_kl=0 train/clip_epsilon=0.05 train/actor_lr=0 train/post_transition_steps=0 rollout/episode_return_std=nan rollout/potential_delta_std=0 rollout/shaping_reward_share=0.0121401 train/grad_norm=319.707
+[V25 PPO] phase=0 rollout/transitions=147456 safety/h_hard_min=6.26228 train/value_loss=719.627 train/value_explained_variance=-1.19209e-07 train/approx_kl=0 train/clip_epsilon=0.05 train/actor_lr=0 train/post_transition_steps=0 rollout/episode_return_std=nan rollout/potential_delta_std=0 rollout/shaping_reward_share=0.0121402 train/grad_norm=318.768
+[V25 PPO] phase=0 rollout/transitions=151552 safety/h_hard_min=6.26228 train/value_loss=761.897 train/value_explained_variance=-1.19209e-07 train/approx_kl=0 train/clip_epsilon=0.05 train/actor_lr=0 train/post_transition_steps=0 rollout/episode_return_std=nan rollout/potential_delta_std=0 rollout/shaping_reward_share=0.0121402 train/grad_norm=332.645
+[HALT][V25] reason=watchdog halt
+wandb: 
+wandb: Run history:
+wandb:                 critic_warmup_active ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:                  critic_warmup_steps ▁▁▁▂▂▂▂▂▃▃▃▃▃▄▄▄▄▄▅▅▅▅▅▅▆▆▆▆▆▇▇▇▇▇███
+wandb:                          elapsed_sec ▁▁▁▂▂▂▂▂▃▃▃▃▃▄▄▄▄▄▅▅▅▅▅▅▆▆▆▆▆▇▇▇▇▇███
+wandb:         episode_return_zero_variance ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:    explained_variance_stuck_negative ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁█
+wandb:                            grad_norm █▄▅▄▅▄▄▂▆▄▄▄▄▄▃▁▅▄▄▄▄▄▄▃▃▃▃▃▃▄▄▄▃▄▃▃▄
+wandb:                                phase ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb: rollout/arena_projection_active_rate ▁██████▅▄██████▃▆██████▁███████▁█████
+wandb:             rollout/base_reward_mean ▁██████▅▃██████▃▅██████▂▇██████▁█████
+wandb:              rollout/cbf_active_rate ▁██████▅▄██████▃▆██████▁███████▁█████
+wandb:                                  +53 ...
+wandb: 
+wandb: Run summary:
+wandb:                 critic_warmup_active 0
+wandb:                  critic_warmup_steps 151552
+wandb:                          elapsed_sec 71.04148
+wandb:         episode_return_zero_variance 0
+wandb:    explained_variance_stuck_negative 1
+wandb:                            grad_norm 332.64478
+wandb:                                phase 0
+wandb:                           phase_name critic_warmup
+wandb: rollout/arena_projection_active_rate 1
+wandb:             rollout/base_reward_mean -2.18831
+wandb:                                  +54 ...
+wandb: 
+wandb: You can sync this run to the cloud by running:
+wandb: wandb sync /data/uav_project/ParallelCBF/runs/v02_attempt6_pbrs_diag_20260503T133731Z/wandb/wandb/offline-run-20260503_213734-emp9gq0j
+wandb: Find logs at: ./runs/v02_attempt6_pbrs_diag_20260503T133731Z/wandb/wandb/offline-run-20260503_213734-emp9gq0j/logs

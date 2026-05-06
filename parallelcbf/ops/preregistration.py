@@ -4,7 +4,10 @@ from __future__ import annotations
 
 import hashlib
 import json
+import math
 import os
+import sys
+from argparse import ArgumentParser
 from dataclasses import asdict
 from datetime import datetime, timezone
 from pathlib import Path
@@ -17,6 +20,10 @@ from parallelcbf.api import (
     PreRegistration,
     PreRegistrationSpec,
 )
+
+
+class ParseError(ValueError):
+    """Raised when an auditable metrics/artifact payload is malformed."""
 
 
 class JsonPreRegistration(PreRegistration):
@@ -42,11 +49,7 @@ class JsonPreRegistration(PreRegistration):
 
         results: dict[str, bool] = {}
         for spec in self._specs:
-            raw_value = metrics.get(spec.metric_name)
-            if isinstance(raw_value, str) or raw_value is None:
-                results[spec.name] = False
-                continue
-            value = float(raw_value)
+            value = require_metric(metrics, spec.metric_name)
             results[spec.name] = self._compare(value, spec.threshold, spec.comparison)
         status: Literal["PASS", "FAIL"] = "PASS" if all(results.values()) else "FAIL"
         return EvaluationReport(status=status, results=results, metrics=dict(metrics), artifact=self._artifact)
@@ -101,4 +104,96 @@ def load_preregistration_artifact(path: str | Path) -> dict[str, Any]:
 
     with Path(path).open("r", encoding="utf-8") as handle:
         loaded: dict[str, Any] = json.load(handle)
+    validate_preregistration_artifact(loaded)
     return loaded
+
+
+def require_metric(metrics: MetricDict, metric_name: str) -> float:
+    """Return a finite numeric metric or raise `ParseError`."""
+
+    if metric_name not in metrics:
+        raise ParseError(f"missing required metric: {metric_name}")
+    raw_value = metrics[metric_name]
+    if isinstance(raw_value, str):
+        raise ParseError(f"metric {metric_name} must be numeric, got string")
+    value = float(raw_value)
+    if not math.isfinite(value):
+        raise ParseError(f"metric {metric_name} must be finite, got {value}")
+    return value
+
+
+def validate_preregistration_artifact(payload: dict[str, Any]) -> None:
+    """Validate required fields in a committed pre-registration artifact."""
+
+    required_top_level = ("committed_at", "specs")
+    for field_name in required_top_level:
+        if field_name not in payload:
+            raise ParseError(f"pre-registration artifact missing field: {field_name}")
+    specs = payload["specs"]
+    if not isinstance(specs, list):
+        raise ParseError("pre-registration artifact field 'specs' must be a list")
+    required_spec_fields = (
+        "name",
+        "hypothesis",
+        "metric_name",
+        "threshold",
+        "comparison",
+        "sample_size",
+    )
+    for index, spec in enumerate(specs):
+        if not isinstance(spec, dict):
+            raise ParseError(f"pre-registration spec {index} must be an object")
+        for field_name in required_spec_fields:
+            if field_name not in spec:
+                raise ParseError(f"pre-registration spec {index} missing field: {field_name}")
+
+
+def sha256_file(path: str | Path) -> str:
+    """Return the SHA-256 digest of a file."""
+
+    digest = hashlib.sha256()
+    with Path(path).open("rb") as handle:
+        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
+def _seal_path_for(path: Path) -> Path:
+    return path.with_name(f"{path.stem}.seal.json")
+
+
+def _commit_cli(argv: list[str]) -> int:
+    parser = ArgumentParser(description="Seal a pre-registration manifest by SHA-256.")
+    parser.add_argument("command", choices=("commit", "verify"))
+    parser.add_argument("path", type=Path)
+    parser.add_argument("--seal-output", type=Path, default=None)
+    args = parser.parse_args(argv)
+
+    sha256 = sha256_file(args.path)
+    seal_path = args.seal_output if args.seal_output is not None else _seal_path_for(args.path)
+    if args.command == "verify":
+        payload = json.loads(seal_path.read_text(encoding="utf-8"))
+        expected = payload.get("sha256")
+        if expected != sha256:
+            raise ParseError(f"pre-registration seal mismatch: expected {expected}, got {sha256}")
+        print(sha256)
+        return 0
+
+    if args.seal_output is not None:
+        payload = {
+            "path": str(args.path),
+            "sha256": sha256,
+            "committed_at": datetime.now(timezone.utc).isoformat(),
+        }
+        seal_path.parent.mkdir(parents=True, exist_ok=True)
+        seal_path.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    print(sha256)
+    return 0
+
+
+def main() -> None:
+    raise SystemExit(_commit_cli(sys.argv[1:]))
+
+
+if __name__ == "__main__":
+    main()

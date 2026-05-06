@@ -1,0 +1,430 @@
+{
+  "experiment_name": "v25_ppo_10m",
+  "strict_pre_registration": true,
+  "bc_checkpoint": "artifacts/v25_bc/best.pt",
+  "bc_checkpoint_sha256": "40c70226bbae24e2bce4c00878fd31173337fb4e411b7f45107a71198f5719e0",
+  "bc_dataset_sha256": "50e59d2f7886dcc00f3c2405ae449cdbaa879b1b5be79b7dcd2993ce65bb5145",
+  "total_timesteps": 10000000,
+  "num_envs": 64,
+  "seed": 20260502,
+  "diagnostic_burn_timesteps": 1000000,
+  "watchdog_config": "configs/v25_watchdog_envelope.yaml",
+  "attempt_2": {
+    "safety_filter": "TripleBarrierCBF",
+    "arena_barriers": [
+      "L + p_x",
+      "L - p_x",
+      "L + p_y",
+      "L - p_y"
+    ],
+    "total_timesteps": 10000000,
+    "watchdog_config": "configs/v25_watchdog_envelope.yaml"
+  },
+  "critic_warmup_gate_v2": {
+    "name": "ev_sustained_breakthrough_gate",
+    "supersedes": "critic_loss_plateau_gate_v1",
+    "global_step_min": 500000,
+    "ev_rolling_window_steps": 50000,
+    "ev_rolling_threshold": 0.6,
+    "ev_sustain_steps": 20000,
+    "ev_slope_window_steps": 100000,
+    "ev_slope_min": -1e-06,
+    "transition": "critic_warmup -> full_ppo"
+  },
+  "observability_patch": {
+    "train_metrics": [
+      "train/value_explained_variance",
+      "train/value_target_mean",
+      "train/value_target_std",
+      "train/value_pred_mean",
+      "train/value_pred_std",
+      "train/value_loss_p50",
+      "train/value_loss_p99"
+    ],
+    "rollout_metrics": [
+      "rollout/episode_return_mean",
+      "rollout/episode_return_std",
+      "rollout/episode_return_min",
+      "rollout/episode_return_max",
+      "rollout/episode_length_mean",
+      "rollout/episode_length_std",
+      "rollout/h_hard_p01",
+      "rollout/h_hard_p50",
+      "rollout/h_hard_p99"
+    ],
+    "critic_lr_schedule": "cosine_decay_to_10pct"
+  },
+  "expected_phase_entry": "phase=0 (CRITIC_WARMUP)",
+  "amendments": [
+    {
+      "id": "A1",
+      "timestamp_utc": "2026-05-02T08:13:46Z",
+      "title": "V25 BC checkpoint surgery",
+      "reason": "Replace legacy AtomicCheckpoint pickle with a torch weights-only pure Tensor state_dict to prevent runtime class-alias deserialization failures.",
+      "legacy_checkpoint_sha256": "635017f6398af9b83ca898bf9660a275801e0c9c753a80b2d115353a1f365810",
+      "new_checkpoint_sha256": "40c70226bbae24e2bce4c00878fd31173337fb4e411b7f45107a71198f5719e0",
+      "verification": {
+        "weights_only_load": "PASS",
+        "parameter_count_match": "PASS",
+        "key_set_match": "PASS",
+        "behavioral_identity_max_abs_diff": 0.0,
+        "stage0_reproduction_breakdown": {
+          "total_success": 0,
+          "total_collision": 0,
+          "total_out_of_arena": 200,
+          "total_timeout": 0
+        }
+      }
+    },
+    {
+      "id": "A2",
+      "timestamp_utc": "2026-05-02T09:45:00Z",
+      "title": "Day 6 observability patch and diagnostic-control burn",
+      "reason": "Instrument critic explained variance, value target/prediction distributions, loss percentiles, rollout return variance, h_hard percentiles, and add watchdogs that expose the Fatal Funnel without changing Layers 1, 2, or the CBF architecture.",
+      "new_watchdog_config": "configs/v26_watchdog_envelope.yaml",
+      "new_watchdog_rules": [
+        "critic_warmup_did_not_converge",
+        "value_loss_increasing",
+        "episode_return_zero_variance",
+        "explained_variance_stuck_negative"
+      ],
+      "diagnostic_burn": {
+        "total_timesteps": 1000000,
+        "safety_filter": "DualBarrierCBF",
+        "triple_barrier_enabled": false
+      }
+    },
+    {
+      "id": "A3",
+      "timestamp_utc": "2026-05-02T11:20:00Z",
+      "title": "TripleBarrierCBF v0.2 attempt-2 pivot",
+      "reason": "The 1M-step diagnostic burn produced a zero-collision but boundary-dominated negative baseline, making arena boundary promotion to Layer 2 necessary.",
+      "diagnostic_burn_summary": {
+        "run_dir": "runs/v26_diagnostic_20260502T110047Z",
+        "total_timesteps": 1000000,
+        "phase_final": 0,
+        "watchdog_halt": false,
+        "termination_totals": {
+          "successes": 0,
+          "collisions": 0,
+          "out_of_arena": 15616,
+          "timeouts": 0
+        },
+        "ev_forensics": {
+          "rolling_50k_ev_peak": 0.6105554974996127,
+          "rolling_50k_ev_peak_step": 999424,
+          "crossed_0_6": true,
+          "value_loss_slope_at_peak": -2.889024030245267,
+          "value_loss_derivative_per_transition_at_peak": -0.00019353836938575074,
+          "raw_ev_peak": 0.6279959082603455,
+          "raw_ev_peak_step": 958464
+        }
+      },
+      "safety_filter_change": {
+        "from": "DualBarrierCBF",
+        "to": "TripleBarrierCBF",
+        "arena_decomposition": "4 linear square halfspace barriers",
+        "constraint_count": 6
+      },
+      "new_watchdog_rules": [
+        "arena_projection_saturation"
+      ]
+    },
+    {
+      "id": "A4",
+      "timestamp_utc": "2026-05-02T11:42:32Z",
+      "title": "TripleBarrier launch calibration after attempt-2 smoke abort",
+      "reason": "Initial v0.2-attempt-2 smoke showed arena projection metrics at zero while out_of_arena persisted; forensic probes found one-step projection activated too late under action_limit=1 and square bounds leaked the circular Toy2D arena near corners.",
+      "aborted_smoke_run": {
+        "run_dir": "runs/v02_attempt2_20260502T112534Z",
+        "first_rollout": {
+          "rollout_arena_projection_active_rate": 0.0,
+          "rollout_out_of_arena": 64,
+          "rollout_collisions": 0
+        }
+      },
+      "calibration": {
+        "triple_barrier_projection": "bounded-acceleration stopping-distance guard over the same four linear arena halfspaces",
+        "arena_bounds_for_circular_env": "inscribed_square",
+        "arena_half_extent": "arena_radius / sqrt(2)"
+      },
+      "verification": {
+        "worst_case_left_acceleration_probe": "PASS",
+        "bc_policy_single_env_probe": "PASS",
+        "bc_policy_64_env_rollout_smoke": {
+          "steps": 4096,
+          "collisions": 0,
+          "out_of_arena": 0,
+          "arena_projection_active_rate": 0.53125
+        }
+      }
+    },
+    {
+      "id": "A5",
+      "timestamp_utc": "2026-05-02T12:08:37Z",
+      "title": "gate_definition_correction_after_v0.2-attempt-2_halt",
+      "reason": "The V1 critic warmup gate used value-loss plateau as a proxy for readiness. Attempt-2 showed that the critic had already achieved a strong EV breakthrough while value loss continued to improve, so the plateau proxy kept the gate locked incorrectly.",
+      "superseded_gate": {
+        "name": "critic_loss_plateau_gate_v1",
+        "failure_mode": "blocked transition while EV was high and value_loss_slope remained negative"
+      },
+      "replacement_gate": {
+        "name": "ev_sustained_breakthrough_gate_v2",
+        "global_step_min": 500000,
+        "ev_rolling_50k_min": 0.6,
+        "ev_sustain_steps": 20000,
+        "ev_slope_100k_min": -1e-06
+      },
+      "attempt_2_evidence": {
+        "run_dir": "runs/v02_attempt2_20260502T114503Z",
+        "halt_step": 1503232,
+        "ev_peak": 0.7428237199783325,
+        "ev_peak_step": 1499136,
+        "last_ev": 0.731096625328064,
+        "last_value_loss": 319.74920654296875,
+        "last_value_loss_slope": -2.480946367564219,
+        "boundary_failures": {
+          "collisions": 0,
+          "out_of_arena": 0
+        }
+      },
+      "resume_note": "Legacy last_safe_step checkpoints before this amendment contain model weights and critic history but not Adam optimizer state or rollout buffer; new checkpoints will include optimizer state and training global step."
+    },
+    {
+      "id": "A6",
+      "timestamp_utc": "2026-05-03T00:00:00Z",
+      "title": "PPO Handoff Slipper and nominal-action log-prob accounting",
+      "reason": "Gate V2 opened correctly, but the first full-PPO segment showed a handoff shock with approx_kl around 1.87 and clip saturation. The actor release now ramps actor LR and PPO clip epsilon over 50k post-transition environment steps, and rollout storage records the nominal action log-prob under the rollout policy instead of a zero placeholder.",
+      "new_hyperparameters": {
+        "actor_lr_warmup_steps": 50000,
+        "clip_eps_warmup_steps": 50000,
+        "clip_eps_warmup_initial": 0.05,
+        "clip_eps_warmup_final": 0.2
+      },
+      "unchanged_controls": {
+        "max_grad_norm": "unchanged",
+        "lambda_0": "unchanged",
+        "advantage_normalization": "unchanged"
+      },
+      "buffer_audit": {
+        "stored_action": "nominal_actor_action_before_projection",
+        "stored_u_nominal": "safety_filter.nominal_action padded to actor action_dim",
+        "stored_u_safe": "safety_filter.safe_action padded to actor action_dim",
+        "environment_action": "projected safe action",
+        "verdict": "Option i"
+      },
+      "resume_decision": {
+        "rejected_checkpoint": "runs/v02_gate_v2_resume_20260502T121701Z/checkpoints/last_safe_step.pt",
+        "rejected_checkpoint_phase": "ppo",
+        "rejected_checkpoint_global_step": 1900544,
+        "fallback_checkpoint": "runs/v02_attempt2_20260502T114503Z/checkpoints/last_safe_step.pt",
+        "fallback_phase": "critic_warmup"
+      },
+      "verification": {
+        "targeted_tests": "26 passed, 1 skipped",
+        "approx_kl_smoke_at_unchanged_policy": 0.0
+      }
+    },
+    {
+      "id": "A7",
+      "timestamp_utc": "2026-05-03T08:31:50Z",
+      "title": "Amendment 5 / F-015 phase-aware watchdog rules",
+      "reason": "phase_aware_watchdog_rules",
+      "defect": "F-015: value_loss_increasing was regime-blind and halted a healthy FULL_PPO segment despite low KL, high EV, and zero safety failures.",
+      "watchdog_config": "configs/v25_watchdog_envelope.yaml",
+      "rule_changes": {
+        "replaced": "value_loss_increasing",
+        "replacement": {
+          "name": "value_loss_increasing_warmup",
+          "active_phases": [
+            "CRITIC_WARMUP"
+          ],
+          "threshold_slope": 0.001,
+          "severity": "WARN"
+        },
+        "added": {
+          "name": "explained_variance_dropping_full_ppo",
+          "active_phases": [
+            "FULL_PPO"
+          ],
+          "threshold": 0.5,
+          "sustained_for_steps": 200000,
+          "severity": "HALT"
+        }
+      },
+      "resume_checkpoint": "runs/v02_slipper_resume_20260503T064452Z/checkpoints/last_safe_step.pt",
+      "resume_note": "The previous halt was a false alarm at 1,863,680 transitions; resume from the clean last_safe_step checkpoint keeps the Slipper-stabilized state."
+    },
+    {
+      "id": "A8",
+      "timestamp_utc": "2026-05-03T11:44:59Z",
+      "title": "Amendment 6 / F-016 rollout reset fix",
+      "reason": "f016_rollout_reset_fix",
+      "defect": "collect_rollout reset the vector environment at every rollout boundary and reset all lanes whenever any lane finished, truncating episodes near the context length and destroying hidden-state continuity.",
+      "fix": {
+        "last_obs_hidden_persistence": true,
+        "reset_at_rollout_start": "disabled after initial collection unless batch shape changes",
+        "per_lane_done_reset": "reset_done(done_mask) required for partial vector resets",
+        "hidden_done_mask": "clear Transformer obs_buffer only for done lanes",
+        "episode_lengths_can_exceed_context_length": true
+      },
+      "verification": {
+        "pytest_focused": "12 passed",
+        "mypy_strict_focused": "Success: no issues found in 3 source files",
+        "new_tests": [
+          "test_collect_rollout_episode_length_can_exceed_context_boundary",
+          "test_collect_rollout_hidden_persists_until_done_then_resets_lane"
+        ]
+      },
+      "attempt_5": {
+        "total_timesteps": 10000000,
+        "start_from": "artifacts/v25_bc/best.pt",
+        "watchlist": [
+          "phase transition around ~1.5M",
+          "first non-zero rollout/termination_success"
+        ]
+      }
+    },
+    {
+      "id": "A9",
+      "timestamp_utc": "2026-05-03T21:40:39Z",
+      "title": "Amendment 7-A / KF-005 final diagnostic burn",
+      "reason": "kf005_wall_hugging_attractor_4x_scale_diagnostic",
+      "controlled_variable": "Add only Ng-Harada-Russell potential-based shaping on top of the attempt-5 PPO training reward.",
+      "r10_reward_composition": {
+        "scenario": "A",
+        "baseline_env_reward_for_ppo": "Toy2D env reward minus eta_cbf * cbf_delta_norm",
+        "eta_cbf": 0.05,
+        "eta_cbf_status": "already active in attempt-5 collect_rollout; unchanged for attempt-6",
+        "attempt_6_delta": "gamma * Phi(next_pre_reset_state) - Phi(current_state)"
+      },
+      "potential_based_shaping": {
+        "reference": "Ng-Harada-Russell 1999",
+        "phi": "-K_d * ||position - goal|| - K_v * max(0, V_target - dot(velocity, direction_to_goal))",
+        "K_d": 4.0,
+        "K_v": 2.0,
+        "V_target": 1.0,
+        "distance_epsilon": 1e-08,
+        "shaping_gamma": "must dynamically equal PPO gamma",
+        "ppo_gamma": 0.99,
+        "terminal_next_state": "pre-reset post-step SafetyState"
+      },
+      "success_criterion": {
+        "train/value_explained_variance": ">=0.60 sustained for 20000 steps",
+        "ev_rolling_slope_100k": ">= -1e-6",
+        "termination_success_target": ">=5% for paper-grade"
+      },
+      "adjustment_policy": {
+        "if_first_burn_fails": "one K_d/K_v scaling adjustment allowed",
+        "scaling_factor_range": [4.0, 4.0],
+        "ppo_hyperparameters": "frozen from attempt-5"
+      },
+      "eval_continuity": {
+        "evaluation": "identical 600-episode final evaluator from attempt-5",
+        "change_eval_conditions": false
+      },
+      "approved_extensions": {
+        "R11": "unit test verifies Phi(next_state) at terminal uses pre-reset state",
+        "R13": "unit tests cover distance=0, distance=1e-9, goal with v=0, goal with v!=0",
+        "R14": [
+          "rollout/potential_phi_std",
+          "rollout/potential_delta_std",
+          "rollout/shaping_reward_share",
+          "rollout/shaping_reward_per_step"
+        ]
+      },
+      "verification": {
+        "pytest_full": "98 passed, 1 skipped",
+        "mypy_strict_focused": "Success: no issues found in 3 source files",
+        "focused_rollout_pbrs": "15 passed"
+      }
+    }
+  ],
+  "ppo_handoff_slipper": {
+    "actor_lr_warmup_steps": 50000,
+    "clip_eps_warmup_steps": 50000,
+    "clip_eps_warmup_initial": 0.05,
+    "clip_eps_warmup_final": 0.2,
+    "schedule_clock": "environment transitions after critic_warmup -> full_ppo transition",
+    "unchanged_controls": [
+      "max_grad_norm",
+      "kl_anchor_lambda_schedule",
+      "advantage_normalization"
+    ]
+  },
+  "ppo_action_logprob_accounting": {
+    "rollout_buffer_action": "nominal_actor_action_before_safety_projection",
+    "environment_action": "safety_filter_projected_safe_action",
+    "old_log_prob": "log_prob(nominal_actor_action | rollout_policy_distribution)"
+  },
+  "resume_policy": {
+    "corrupted_resume_rejected": "runs/v02_gate_v2_resume_20260502T121701Z/checkpoints/last_safe_step.pt",
+    "corrupted_reason": "phase=ppo checkpoint saved after handoff KL/clip shock; optimizer state should not be reused",
+    "fallback_checkpoint": "runs/v02_attempt2_20260502T114503Z/checkpoints/last_safe_step.pt",
+    "fallback_phase": "critic_warmup_pre_transition"
+  },
+  "rollout_state_persistence": {
+    "defect_id": "F-016",
+    "reason": "f016_rollout_reset_fix",
+    "collect_rollout_start_reset": "only when no persisted observation/hidden state exists or vector batch shape changes",
+    "done_reset_policy": "reset only lanes with natural done signals via reset_done(done_mask)",
+    "hidden_state_policy": "persist hidden obs_buffer across rollout boundaries and clear only done lanes",
+    "episode_accounting_policy": "persist episode ids, timesteps, returns, and lengths across rollout boundaries",
+    "checkpoint_persistence": [
+      "rollout_last_observation",
+      "rollout_last_hidden_obs_buffer",
+      "rollout_episode_ids",
+      "rollout_timesteps",
+      "rollout_episode_returns",
+      "rollout_episode_lengths"
+    ]
+  },
+  "attempt_6_potential_based_shaping": {
+    "status": "pre_registered",
+    "reason": "kf005_wall_hugging_attractor_4x_scale_diagnostic",
+    "reward_composition_order": [
+      "env_reward",
+      "- eta_cbf * cbf_delta_norm",
+      "+ gamma * Phi(next_pre_reset_state) - Phi(current_state)"
+    ],
+    "eta_cbf": 0.05,
+    "eta_cbf_baseline_status": "active in attempt-5 and unchanged",
+    "K_d": 4.0,
+    "K_v": 2.0,
+    "V_target": 1.0,
+    "distance_epsilon": 1e-08,
+    "gamma_match_assertion": true,
+    "ppo_gamma": 0.99,
+    "diagnostic_burn_timesteps": 1000000,
+    "first_burn_success_gate": {
+      "metric": "train/value_explained_variance",
+      "threshold": 0.6,
+      "sustained_for_steps": 20000,
+      "ev_slope_100k_min": -1e-06
+    },
+    "adjustment_policy": {
+      "max_adjustments": 1,
+      "K_d_K_v_scale_factor_min": 4.0,
+      "K_d_K_v_scale_factor_max": 4.0
+    },
+    "ppo_hyperparameters_frozen_from_attempt_5": true,
+    "paper_grade_termination_success_target": 0.05,
+    "eval_continuity": "use identical 600-episode final evaluation configuration from attempt-5"
+  },
+  "potential_shaping_metrics": {
+    "rollout/potential_phi_mean": "mean Phi(current_state)",
+    "rollout/potential_phi_std": "std Phi(current_state)",
+    "rollout/potential_delta_mean": "mean gamma*Phi(next_pre_reset)-Phi(current)",
+    "rollout/potential_delta_std": "std gamma*Phi(next_pre_reset)-Phi(current)",
+    "rollout/shaping_reward_share": "sum(abs(PBRS_delta)) / sum(abs(final_training_reward))",
+    "rollout/shaping_reward_per_step": "mean PBRS delta per rollout transition",
+    "rollout/base_reward_mean": "mean attempt-5 baseline PPO reward before PBRS",
+    "rollout/cbf_penalty_mean": "mean eta_cbf * cbf_delta_norm",
+    "rollout/shaped_reward_mean": "mean final PPO training reward after PBRS",
+    "rollout/state_distribution_entropy": "Shannon entropy over discretized position grid",
+    "rollout/distance_to_goal_std": "std distance to goal across rollout samples",
+    "rollout/distance_to_nearest_wall_mean": "mean nearest-wall distance across rollout samples",
+    "rollout/distance_to_nearest_wall_std": "std nearest-wall distance across rollout samples",
+    "rollout/cbf_arena_intervention_duration_mean": "mean continuous active duration for arena projection"
+  }
+}

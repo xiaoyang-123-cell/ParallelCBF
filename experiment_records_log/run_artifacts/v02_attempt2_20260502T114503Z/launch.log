@@ -1,0 +1,424 @@
+output_dir=/data/uav_project/ParallelCBF/runs/v02_attempt2_20260502T114503Z
+tb_logdir=/data/uav_project/ParallelCBF/runs/v02_attempt2_20260502T114503Z/tb
+pre_registration_manifest_sha256=1eec2567924e3214f6c70944ba6ee2ea3862932b7f83284742213c6ef016ac13
+bc_checkpoint_sha256=40c70226bbae24e2bce4c00878fd31173337fb4e411b7f45107a71198f5719e0
+bc_dataset_sha256=50e59d2f7886dcc00f3c2405ae449cdbaa879b1b5be79b7dcd2993ce65bb5145
+============================================================
+WATCHDOG REGISTRY (V25 PPO training):
+  - Train Loss Explosion: metric=train_loss, threshold=1000000.0, when=>
+  - Grad Norm Blowup: metric=grad_norm, threshold=10000.0, when=>
+  - Val Overfit: metric=val_overfit_ratio, threshold=5.0, when=>
+  - critic_warmup_did_not_converge: metric=phase, threshold=1500000, when=sustained_phase
+  - value_loss_increasing: metric=value_loss_slope, threshold=0.0, when=>
+  - episode_return_zero_variance: metric=episode_return_zero_variance, threshold=0.5, when=>
+  - explained_variance_stuck_negative: metric=explained_variance_stuck_negative, threshold=0.5, when=>
+  - arena_projection_saturation: metric=arena_projection_active_rate, threshold=0.5, when=>
+============================================================
+[INFO][V25] phase=0 (CRITIC_WARMUP) entered cleanly
+loaded_actor_parameters=3167235
+[INFO][V25] algo.learn entry reached
+wandb: WARNING The anonymous setting has no effect and will be removed in a future version.
+wandb: Tracking run with wandb version 0.26.1
+wandb: W&B syncing is set to `offline` in this directory. Run `wandb online` or set WANDB_MODE=online to enable cloud syncing.
+wandb: Run data is saved locally in /data/uav_project/ParallelCBF/runs/v02_attempt2_20260502T114503Z/wandb/wandb/offline-run-20260502_194506-9tqenbqc
+wandb: WARNING URL not available in offline run
+wandb_status=initialized mode=offline url=unavailable
+tensorboard_status=initialized logdir=/data/uav_project/ParallelCBF/runs/v02_attempt2_20260502T114503Z/tb
+[V25 PPO] phase=0 rollout/transitions=4096 safety/h_hard_min=4.92418 train/value_loss=1556.91 train/value_explained_variance=0.00391704 rollout/episode_return_std=nan train/grad_norm=423.279
+[V25 PPO] phase=0 rollout/transitions=8192 safety/h_hard_min=4.92098 train/value_loss=1744.19 train/value_explained_variance=0.00681692 rollout/episode_return_std=nan train/grad_norm=459.806
+[V25 PPO] phase=0 rollout/transitions=12288 safety/h_hard_min=4.92235 train/value_loss=1739.04 train/value_explained_variance=0.01058 rollout/episode_return_std=nan train/grad_norm=453.182
+[V25 PPO] phase=0 rollout/transitions=16384 safety/h_hard_min=4.92434 train/value_loss=1618.56 train/value_explained_variance=0.0148733 rollout/episode_return_std=nan train/grad_norm=435.32
+[V25 PPO] phase=0 rollout/transitions=20480 safety/h_hard_min=4.92178 train/value_loss=1692.71 train/value_explained_variance=0.0172048 rollout/episode_return_std=nan train/grad_norm=449.74
+[V25 PPO] phase=0 rollout/transitions=24576 safety/h_hard_min=4.92483 train/value_loss=1678.48 train/value_explained_variance=0.0223191 rollout/episode_return_std=nan train/grad_norm=447.133
+[V25 PPO] phase=0 rollout/transitions=28672 safety/h_hard_min=4.92545 train/value_loss=1620.69 train/value_explained_variance=0.0282895 rollout/episode_return_std=nan train/grad_norm=433.774
+[V25 PPO] phase=0 rollout/transitions=32768 safety/h_hard_min=4.92146 train/value_loss=1581.54 train/value_explained_variance=0.0324661 rollout/episode_return_std=nan train/grad_norm=437.676
+[V25 PPO] phase=0 rollout/transitions=36864 safety/h_hard_min=4.92432 train/value_loss=1562.89 train/value_explained_variance=0.0342211 rollout/episode_return_std=nan train/grad_norm=429.429
+[V25 PPO] phase=0 rollout/transitions=40960 safety/h_hard_min=4.92606 train/value_loss=1634.07 train/value_explained_variance=0.0398977 rollout/episode_return_std=nan train/grad_norm=441.869
+[V25 PPO] phase=0 rollout/transitions=45056 safety/h_hard_min=4.91993 train/value_loss=1533.83 train/value_explained_variance=0.0425701 rollout/episode_return_std=nan train/grad_norm=424.013
+[V25 PPO] phase=0 rollout/transitions=49152 safety/h_hard_min=4.92145 train/value_loss=1689.08 train/value_explained_variance=0.0453442 rollout/episode_return_std=nan train/grad_norm=446.888
+[V25 PPO] phase=0 rollout/transitions=53248 safety/h_hard_min=4.9268 train/value_loss=1523.28 train/value_explained_variance=0.0579771 rollout/episode_return_std=nan train/grad_norm=438.91
+[V25 PPO] phase=0 rollout/transitions=57344 safety/h_hard_min=4.92356 train/value_loss=1559.27 train/value_explained_variance=0.0578337 rollout/episode_return_std=nan train/grad_norm=428.148
+[V25 PPO] phase=0 rollout/transitions=61440 safety/h_hard_min=4.92295 train/value_loss=1500.29 train/value_explained_variance=0.0612348 rollout/episode_return_std=nan train/grad_norm=412.201
+[V25 PPO] phase=0 rollout/transitions=65536 safety/h_hard_min=4.92603 train/value_loss=1479.94 train/value_explained_variance=0.0613608 rollout/episode_return_std=nan train/grad_norm=415.15
+[V25 PPO] phase=0 rollout/transitions=69632 safety/h_hard_min=4.92595 train/value_loss=1616.08 train/value_explained_variance=0.0628675 rollout/episode_return_std=nan train/grad_norm=433.57
+[V25 PPO] phase=0 rollout/transitions=73728 safety/h_hard_min=4.9211 train/value_loss=1491.84 train/value_explained_variance=0.0755469 rollout/episode_return_std=nan train/grad_norm=418.676
+[V25 PPO] phase=0 rollout/transitions=77824 safety/h_hard_min=4.923 train/value_loss=1491.55 train/value_explained_variance=0.0699331 rollout/episode_return_std=nan train/grad_norm=417.124
+[V25 PPO] phase=0 rollout/transitions=81920 safety/h_hard_min=4.92433 train/value_loss=1676.78 train/value_explained_variance=0.0714021 rollout/episode_return_std=nan train/grad_norm=447.544
+[V25 PPO] phase=0 rollout/transitions=86016 safety/h_hard_min=4.92382 train/value_loss=1492.76 train/value_explained_variance=0.0733701 rollout/episode_return_std=nan train/grad_norm=415.996
+[V25 PPO] phase=0 rollout/transitions=90112 safety/h_hard_min=4.92319 train/value_loss=1519.16 train/value_explained_variance=0.0879155 rollout/episode_return_std=nan train/grad_norm=429.696
+[V25 PPO] phase=0 rollout/transitions=94208 safety/h_hard_min=4.92547 train/value_loss=1501.77 train/value_explained_variance=0.0885642 rollout/episode_return_std=nan train/grad_norm=416.773
+[V25 PPO] phase=0 rollout/transitions=98304 safety/h_hard_min=4.92406 train/value_loss=1472.39 train/value_explained_variance=0.0928186 rollout/episode_return_std=nan train/grad_norm=417.37
+[V25 PPO] phase=0 rollout/transitions=102400 safety/h_hard_min=4.92152 train/value_loss=1483.96 train/value_explained_variance=0.101546 rollout/episode_return_std=nan train/grad_norm=418.402
+[V25 PPO] phase=0 rollout/transitions=106496 safety/h_hard_min=4.92026 train/value_loss=1443.25 train/value_explained_variance=0.0904679 rollout/episode_return_std=nan train/grad_norm=404.776
+[V25 PPO] phase=0 rollout/transitions=110592 safety/h_hard_min=4.92475 train/value_loss=1401.83 train/value_explained_variance=0.0964512 rollout/episode_return_std=nan train/grad_norm=399.761
+[V25 PPO] phase=0 rollout/transitions=114688 safety/h_hard_min=4.92319 train/value_loss=1387.03 train/value_explained_variance=0.108788 rollout/episode_return_std=nan train/grad_norm=400.021
+[V25 PPO] phase=0 rollout/transitions=118784 safety/h_hard_min=4.92261 train/value_loss=1428.66 train/value_explained_variance=0.113586 rollout/episode_return_std=nan train/grad_norm=407.768
+[V25 PPO] phase=0 rollout/transitions=122880 safety/h_hard_min=4.9278 train/value_loss=1469.23 train/value_explained_variance=0.0950881 rollout/episode_return_std=nan train/grad_norm=421.34
+[V25 PPO] phase=0 rollout/transitions=126976 safety/h_hard_min=4.92191 train/value_loss=1479.52 train/value_explained_variance=0.112559 rollout/episode_return_std=nan train/grad_norm=415.934
+[V25 PPO] phase=0 rollout/transitions=131072 safety/h_hard_min=4.92093 train/value_loss=1489.67 train/value_explained_variance=0.116434 rollout/episode_return_std=nan train/grad_norm=416.491
+[V25 PPO] phase=0 rollout/transitions=135168 safety/h_hard_min=4.92325 train/value_loss=1501.78 train/value_explained_variance=0.110736 rollout/episode_return_std=nan train/grad_norm=412.285
+[V25 PPO] phase=0 rollout/transitions=139264 safety/h_hard_min=4.92481 train/value_loss=1538.88 train/value_explained_variance=0.115356 rollout/episode_return_std=nan train/grad_norm=426.691
+[V25 PPO] phase=0 rollout/transitions=143360 safety/h_hard_min=4.92551 train/value_loss=1406.44 train/value_explained_variance=0.133466 rollout/episode_return_std=nan train/grad_norm=400.167
+[V25 PPO] phase=0 rollout/transitions=147456 safety/h_hard_min=4.92497 train/value_loss=1417.92 train/value_explained_variance=0.13364 rollout/episode_return_std=nan train/grad_norm=399.948
+[V25 PPO] phase=0 rollout/transitions=151552 safety/h_hard_min=4.92544 train/value_loss=1445.25 train/value_explained_variance=0.14309 rollout/episode_return_std=nan train/grad_norm=419.852
+[V25 PPO] phase=0 rollout/transitions=155648 safety/h_hard_min=4.92509 train/value_loss=1544.6 train/value_explained_variance=0.133161 rollout/episode_return_std=nan train/grad_norm=426.015
+[V25 PPO] phase=0 rollout/transitions=159744 safety/h_hard_min=4.92751 train/value_loss=1291.73 train/value_explained_variance=0.157138 rollout/episode_return_std=nan train/grad_norm=383.419
+[V25 PPO] phase=0 rollout/transitions=163840 safety/h_hard_min=4.92463 train/value_loss=1331.85 train/value_explained_variance=0.155699 rollout/episode_return_std=nan train/grad_norm=381.175
+[V25 PPO] phase=0 rollout/transitions=167936 safety/h_hard_min=4.92452 train/value_loss=1457.84 train/value_explained_variance=0.149069 rollout/episode_return_std=nan train/grad_norm=408.473
+[V25 PPO] phase=0 rollout/transitions=172032 safety/h_hard_min=4.92291 train/value_loss=1446.91 train/value_explained_variance=0.139591 rollout/episode_return_std=nan train/grad_norm=407.612
+[V25 PPO] phase=0 rollout/transitions=176128 safety/h_hard_min=4.92315 train/value_loss=1435.95 train/value_explained_variance=0.142328 rollout/episode_return_std=nan train/grad_norm=409.051
+[V25 PPO] phase=0 rollout/transitions=180224 safety/h_hard_min=4.92353 train/value_loss=1436.62 train/value_explained_variance=0.160504 rollout/episode_return_std=nan train/grad_norm=415.886
+[V25 PPO] phase=0 rollout/transitions=184320 safety/h_hard_min=4.92522 train/value_loss=1376.24 train/value_explained_variance=0.169909 rollout/episode_return_std=nan train/grad_norm=399.048
+[V25 PPO] phase=0 rollout/transitions=188416 safety/h_hard_min=4.92409 train/value_loss=1611.78 train/value_explained_variance=0.128337 rollout/episode_return_std=nan train/grad_norm=445.606
+[V25 PPO] phase=0 rollout/transitions=192512 safety/h_hard_min=4.92371 train/value_loss=1541.4 train/value_explained_variance=0.15183 rollout/episode_return_std=nan train/grad_norm=423.84
+[V25 PPO] phase=0 rollout/transitions=196608 safety/h_hard_min=4.92215 train/value_loss=1422.67 train/value_explained_variance=0.176385 rollout/episode_return_std=nan train/grad_norm=406.702
+[V25 PPO] phase=0 rollout/transitions=200704 safety/h_hard_min=4.92624 train/value_loss=1480.19 train/value_explained_variance=0.146031 rollout/episode_return_std=nan train/grad_norm=409.831
+[V25 PPO] phase=0 rollout/transitions=204800 safety/h_hard_min=4.92342 train/value_loss=1402.52 train/value_explained_variance=0.173818 rollout/episode_return_std=nan train/grad_norm=391.985
+[V25 PPO] phase=0 rollout/transitions=208896 safety/h_hard_min=4.92185 train/value_loss=1416.04 train/value_explained_variance=0.170068 rollout/episode_return_std=nan train/grad_norm=404.499
+[V25 PPO] phase=0 rollout/transitions=212992 safety/h_hard_min=4.9221 train/value_loss=1429.84 train/value_explained_variance=0.177205 rollout/episode_return_std=nan train/grad_norm=408.16
+[V25 PPO] phase=0 rollout/transitions=217088 safety/h_hard_min=4.92334 train/value_loss=1206.44 train/value_explained_variance=0.190784 rollout/episode_return_std=nan train/grad_norm=364.659
+[V25 PPO] phase=0 rollout/transitions=221184 safety/h_hard_min=4.92295 train/value_loss=1350.99 train/value_explained_variance=0.184777 rollout/episode_return_std=nan train/grad_norm=386.282
+[V25 PPO] phase=0 rollout/transitions=225280 safety/h_hard_min=4.92649 train/value_loss=1415.53 train/value_explained_variance=0.183222 rollout/episode_return_std=nan train/grad_norm=408.666
+[V25 PPO] phase=0 rollout/transitions=229376 safety/h_hard_min=4.92241 train/value_loss=1499.14 train/value_explained_variance=0.19445 rollout/episode_return_std=nan train/grad_norm=416.505
+[V25 PPO] phase=0 rollout/transitions=233472 safety/h_hard_min=4.92452 train/value_loss=1389.64 train/value_explained_variance=0.195126 rollout/episode_return_std=nan train/grad_norm=399.238
+[V25 PPO] phase=0 rollout/transitions=237568 safety/h_hard_min=4.92045 train/value_loss=1334.62 train/value_explained_variance=0.203153 rollout/episode_return_std=nan train/grad_norm=385.014
+[V25 PPO] phase=0 rollout/transitions=241664 safety/h_hard_min=4.92551 train/value_loss=1345.22 train/value_explained_variance=0.202065 rollout/episode_return_std=nan train/grad_norm=395.283
+[V25 PPO] phase=0 rollout/transitions=245760 safety/h_hard_min=4.92268 train/value_loss=1331.54 train/value_explained_variance=0.210483 rollout/episode_return_std=nan train/grad_norm=396.04
+[V25 PPO] phase=0 rollout/transitions=249856 safety/h_hard_min=4.92516 train/value_loss=1409.49 train/value_explained_variance=0.199664 rollout/episode_return_std=nan train/grad_norm=400.542
+[V25 PPO] phase=0 rollout/transitions=253952 safety/h_hard_min=4.92699 train/value_loss=1211.45 train/value_explained_variance=0.208934 rollout/episode_return_std=nan train/grad_norm=369.566
+[V25 PPO] phase=0 rollout/transitions=258048 safety/h_hard_min=4.92572 train/value_loss=1334.33 train/value_explained_variance=0.214398 rollout/episode_return_std=nan train/grad_norm=390.779
+[V25 PPO] phase=0 rollout/transitions=262144 safety/h_hard_min=4.92457 train/value_loss=1367.6 train/value_explained_variance=0.205329 rollout/episode_return_std=nan train/grad_norm=394.68
+[V25 PPO] phase=0 rollout/transitions=266240 safety/h_hard_min=4.92546 train/value_loss=1225.46 train/value_explained_variance=0.230515 rollout/episode_return_std=nan train/grad_norm=361.664
+[V25 PPO] phase=0 rollout/transitions=270336 safety/h_hard_min=4.92284 train/value_loss=1115.46 train/value_explained_variance=0.263407 rollout/episode_return_std=nan train/grad_norm=362.348
+[V25 PPO] phase=0 rollout/transitions=274432 safety/h_hard_min=4.92562 train/value_loss=1366.32 train/value_explained_variance=0.210335 rollout/episode_return_std=nan train/grad_norm=389.033
+[V25 PPO] phase=0 rollout/transitions=278528 safety/h_hard_min=4.92059 train/value_loss=1287.51 train/value_explained_variance=0.233706 rollout/episode_return_std=nan train/grad_norm=381.312
+[V25 PPO] phase=0 rollout/transitions=282624 safety/h_hard_min=4.92062 train/value_loss=1305.39 train/value_explained_variance=0.220942 rollout/episode_return_std=nan train/grad_norm=386.155
+[V25 PPO] phase=0 rollout/transitions=286720 safety/h_hard_min=4.92208 train/value_loss=1334.03 train/value_explained_variance=0.221684 rollout/episode_return_std=nan train/grad_norm=388.354
+[V25 PPO] phase=0 rollout/transitions=290816 safety/h_hard_min=4.92459 train/value_loss=1444.29 train/value_explained_variance=0.207417 rollout/episode_return_std=nan train/grad_norm=407.281
+[V25 PPO] phase=0 rollout/transitions=294912 safety/h_hard_min=4.92552 train/value_loss=1267.96 train/value_explained_variance=0.245793 rollout/episode_return_std=nan train/grad_norm=376.448
+[V25 PPO] phase=0 rollout/transitions=299008 safety/h_hard_min=4.92343 train/value_loss=1220.95 train/value_explained_variance=0.245736 rollout/episode_return_std=nan train/grad_norm=370.274
+[V25 PPO] phase=0 rollout/transitions=303104 safety/h_hard_min=4.92442 train/value_loss=1268.78 train/value_explained_variance=0.23327 rollout/episode_return_std=nan train/grad_norm=377.457
+[V25 PPO] phase=0 rollout/transitions=307200 safety/h_hard_min=4.92312 train/value_loss=1268.84 train/value_explained_variance=0.241958 rollout/episode_return_std=nan train/grad_norm=382.665
+[V25 PPO] phase=0 rollout/transitions=311296 safety/h_hard_min=4.92419 train/value_loss=1267.26 train/value_explained_variance=0.239325 rollout/episode_return_std=nan train/grad_norm=368.938
+[V25 PPO] phase=0 rollout/transitions=315392 safety/h_hard_min=4.92184 train/value_loss=1167.2 train/value_explained_variance=0.293364 rollout/episode_return_std=nan train/grad_norm=359.717
+[V25 PPO] phase=0 rollout/transitions=319488 safety/h_hard_min=4.92376 train/value_loss=1296.9 train/value_explained_variance=0.230356 rollout/episode_return_std=nan train/grad_norm=380.287
+[V25 PPO] phase=0 rollout/transitions=323584 safety/h_hard_min=4.92285 train/value_loss=1309.65 train/value_explained_variance=0.250874 rollout/episode_return_std=nan train/grad_norm=388.11
+[V25 PPO] phase=0 rollout/transitions=327680 safety/h_hard_min=4.92148 train/value_loss=1233.04 train/value_explained_variance=0.258676 rollout/episode_return_std=nan train/grad_norm=371.219
+[V25 PPO] phase=0 rollout/transitions=331776 safety/h_hard_min=4.92319 train/value_loss=1266.08 train/value_explained_variance=0.278412 rollout/episode_return_std=nan train/grad_norm=375.757
+[V25 PPO] phase=0 rollout/transitions=335872 safety/h_hard_min=4.92493 train/value_loss=1207.22 train/value_explained_variance=0.265247 rollout/episode_return_std=nan train/grad_norm=368.974
+[V25 PPO] phase=0 rollout/transitions=339968 safety/h_hard_min=4.92293 train/value_loss=1184.31 train/value_explained_variance=0.255449 rollout/episode_return_std=nan train/grad_norm=354.66
+[V25 PPO] phase=0 rollout/transitions=344064 safety/h_hard_min=4.92319 train/value_loss=1175.5 train/value_explained_variance=0.272961 rollout/episode_return_std=nan train/grad_norm=356.633
+[V25 PPO] phase=0 rollout/transitions=348160 safety/h_hard_min=4.92546 train/value_loss=1186.69 train/value_explained_variance=0.276522 rollout/episode_return_std=nan train/grad_norm=360.132
+[V25 PPO] phase=0 rollout/transitions=352256 safety/h_hard_min=4.92331 train/value_loss=1240.34 train/value_explained_variance=0.266212 rollout/episode_return_std=nan train/grad_norm=372.286
+[V25 PPO] phase=0 rollout/transitions=356352 safety/h_hard_min=4.92509 train/value_loss=1136.98 train/value_explained_variance=0.307848 rollout/episode_return_std=nan train/grad_norm=352.296
+[V25 PPO] phase=0 rollout/transitions=360448 safety/h_hard_min=4.9238 train/value_loss=1234.47 train/value_explained_variance=0.239304 rollout/episode_return_std=nan train/grad_norm=375.372
+[V25 PPO] phase=0 rollout/transitions=364544 safety/h_hard_min=4.92316 train/value_loss=1217.53 train/value_explained_variance=0.276643 rollout/episode_return_std=nan train/grad_norm=359.593
+[V25 PPO] phase=0 rollout/transitions=368640 safety/h_hard_min=4.92273 train/value_loss=1247.16 train/value_explained_variance=0.251781 rollout/episode_return_std=nan train/grad_norm=377.008
+[V25 PPO] phase=0 rollout/transitions=372736 safety/h_hard_min=4.92434 train/value_loss=1225.05 train/value_explained_variance=0.271499 rollout/episode_return_std=nan train/grad_norm=357.48
+[V25 PPO] phase=0 rollout/transitions=376832 safety/h_hard_min=4.92434 train/value_loss=1290.26 train/value_explained_variance=0.289787 rollout/episode_return_std=nan train/grad_norm=389.01
+[V25 PPO] phase=0 rollout/transitions=380928 safety/h_hard_min=4.92347 train/value_loss=1074.11 train/value_explained_variance=0.308755 rollout/episode_return_std=nan train/grad_norm=343.106
+[V25 PPO] phase=0 rollout/transitions=385024 safety/h_hard_min=4.92495 train/value_loss=1181.08 train/value_explained_variance=0.312376 rollout/episode_return_std=nan train/grad_norm=369.567
+[V25 PPO] phase=0 rollout/transitions=389120 safety/h_hard_min=4.92578 train/value_loss=1185.65 train/value_explained_variance=0.264489 rollout/episode_return_std=nan train/grad_norm=348.612
+[V25 PPO] phase=0 rollout/transitions=393216 safety/h_hard_min=4.92352 train/value_loss=1263.59 train/value_explained_variance=0.272029 rollout/episode_return_std=nan train/grad_norm=373.448
+[V25 PPO] phase=0 rollout/transitions=397312 safety/h_hard_min=4.92634 train/value_loss=1185.4 train/value_explained_variance=0.29997 rollout/episode_return_std=nan train/grad_norm=367.191
+[V25 PPO] phase=0 rollout/transitions=401408 safety/h_hard_min=4.92622 train/value_loss=1237.29 train/value_explained_variance=0.255232 rollout/episode_return_std=nan train/grad_norm=367.646
+[V25 PPO] phase=0 rollout/transitions=405504 safety/h_hard_min=4.91882 train/value_loss=1219.74 train/value_explained_variance=0.296448 rollout/episode_return_std=nan train/grad_norm=362.798
+[V25 PPO] phase=0 rollout/transitions=409600 safety/h_hard_min=4.92383 train/value_loss=1160.08 train/value_explained_variance=0.304673 rollout/episode_return_std=nan train/grad_norm=352.41
+[V25 PPO] phase=0 rollout/transitions=413696 safety/h_hard_min=4.92263 train/value_loss=1127.3 train/value_explained_variance=0.30529 rollout/episode_return_std=nan train/grad_norm=343.41
+[V25 PPO] phase=0 rollout/transitions=417792 safety/h_hard_min=4.92586 train/value_loss=1175.83 train/value_explained_variance=0.304847 rollout/episode_return_std=nan train/grad_norm=359.429
+[V25 PPO] phase=0 rollout/transitions=421888 safety/h_hard_min=4.92533 train/value_loss=1104.69 train/value_explained_variance=0.306272 rollout/episode_return_std=nan train/grad_norm=340.28
+[V25 PPO] phase=0 rollout/transitions=425984 safety/h_hard_min=4.92689 train/value_loss=1128.38 train/value_explained_variance=0.316804 rollout/episode_return_std=nan train/grad_norm=347.565
+[V25 PPO] phase=0 rollout/transitions=430080 safety/h_hard_min=4.92546 train/value_loss=1243.88 train/value_explained_variance=0.284126 rollout/episode_return_std=nan train/grad_norm=361.482
+[V25 PPO] phase=0 rollout/transitions=434176 safety/h_hard_min=4.92539 train/value_loss=1124.63 train/value_explained_variance=0.345108 rollout/episode_return_std=nan train/grad_norm=345.944
+[V25 PPO] phase=0 rollout/transitions=438272 safety/h_hard_min=4.91759 train/value_loss=1231.25 train/value_explained_variance=0.303751 rollout/episode_return_std=nan train/grad_norm=360.567
+[V25 PPO] phase=0 rollout/transitions=442368 safety/h_hard_min=4.92331 train/value_loss=1115.72 train/value_explained_variance=0.329316 rollout/episode_return_std=nan train/grad_norm=353.489
+[V25 PPO] phase=0 rollout/transitions=446464 safety/h_hard_min=4.92573 train/value_loss=1091.75 train/value_explained_variance=0.348075 rollout/episode_return_std=nan train/grad_norm=339.562
+[V25 PPO] phase=0 rollout/transitions=450560 safety/h_hard_min=4.92111 train/value_loss=1105.42 train/value_explained_variance=0.331651 rollout/episode_return_std=nan train/grad_norm=339.257
+[V25 PPO] phase=0 rollout/transitions=454656 safety/h_hard_min=4.92174 train/value_loss=1183.79 train/value_explained_variance=0.32563 rollout/episode_return_std=nan train/grad_norm=361.547
+[V25 PPO] phase=0 rollout/transitions=458752 safety/h_hard_min=4.9222 train/value_loss=1085 train/value_explained_variance=0.329174 rollout/episode_return_std=nan train/grad_norm=341.75
+[V25 PPO] phase=0 rollout/transitions=462848 safety/h_hard_min=4.92478 train/value_loss=1033.93 train/value_explained_variance=0.36618 rollout/episode_return_std=nan train/grad_norm=339.912
+[V25 PPO] phase=0 rollout/transitions=466944 safety/h_hard_min=4.92575 train/value_loss=1192.97 train/value_explained_variance=0.31222 rollout/episode_return_std=nan train/grad_norm=348.241
+[V25 PPO] phase=0 rollout/transitions=471040 safety/h_hard_min=4.92553 train/value_loss=1095.38 train/value_explained_variance=0.317274 rollout/episode_return_std=nan train/grad_norm=347.809
+[V25 PPO] phase=0 rollout/transitions=475136 safety/h_hard_min=4.92411 train/value_loss=1111.37 train/value_explained_variance=0.355068 rollout/episode_return_std=nan train/grad_norm=346.161
+[V25 PPO] phase=0 rollout/transitions=479232 safety/h_hard_min=4.92554 train/value_loss=1178.16 train/value_explained_variance=0.344268 rollout/episode_return_std=nan train/grad_norm=351.812
+[V25 PPO] phase=0 rollout/transitions=483328 safety/h_hard_min=4.92056 train/value_loss=1109.19 train/value_explained_variance=0.337867 rollout/episode_return_std=nan train/grad_norm=342.263
+[V25 PPO] phase=0 rollout/transitions=487424 safety/h_hard_min=4.92289 train/value_loss=1096.82 train/value_explained_variance=0.342372 rollout/episode_return_std=nan train/grad_norm=342.171
+[V25 PPO] phase=0 rollout/transitions=491520 safety/h_hard_min=4.92555 train/value_loss=1154.53 train/value_explained_variance=0.344465 rollout/episode_return_std=nan train/grad_norm=352.123
+[V25 PPO] phase=0 rollout/transitions=495616 safety/h_hard_min=4.92198 train/value_loss=1169.06 train/value_explained_variance=0.304849 rollout/episode_return_std=nan train/grad_norm=359.407
+[V25 PPO] phase=0 rollout/transitions=499712 safety/h_hard_min=4.92316 train/value_loss=1076.1 train/value_explained_variance=0.337843 rollout/episode_return_std=nan train/grad_norm=332.889
+[V25 PPO] phase=0 rollout/transitions=503808 safety/h_hard_min=4.9232 train/value_loss=1045.05 train/value_explained_variance=0.367981 rollout/episode_return_std=nan train/grad_norm=332.336
+[V25 PPO] phase=0 rollout/transitions=507904 safety/h_hard_min=4.92474 train/value_loss=1054.15 train/value_explained_variance=0.340312 rollout/episode_return_std=nan train/grad_norm=329.59
+[V25 PPO] phase=0 rollout/transitions=512000 safety/h_hard_min=4.92555 train/value_loss=928.423 train/value_explained_variance=0.386961 rollout/episode_return_std=nan train/grad_norm=307.398
+[V25 PPO] phase=0 rollout/transitions=516096 safety/h_hard_min=4.92502 train/value_loss=1102.52 train/value_explained_variance=0.32371 rollout/episode_return_std=nan train/grad_norm=338.155
+[V25 PPO] phase=0 rollout/transitions=520192 safety/h_hard_min=4.92298 train/value_loss=1078.2 train/value_explained_variance=0.361221 rollout/episode_return_std=nan train/grad_norm=335.511
+[V25 PPO] phase=0 rollout/transitions=524288 safety/h_hard_min=4.91843 train/value_loss=1004.04 train/value_explained_variance=0.383047 rollout/episode_return_std=nan train/grad_norm=324.852
+[V25 PPO] phase=0 rollout/transitions=528384 safety/h_hard_min=4.92233 train/value_loss=1116.31 train/value_explained_variance=0.356735 rollout/episode_return_std=nan train/grad_norm=338.834
+[V25 PPO] phase=0 rollout/transitions=532480 safety/h_hard_min=4.92599 train/value_loss=1027.25 train/value_explained_variance=0.379478 rollout/episode_return_std=nan train/grad_norm=319.872
+[V25 PPO] phase=0 rollout/transitions=536576 safety/h_hard_min=4.9253 train/value_loss=1081.38 train/value_explained_variance=0.377302 rollout/episode_return_std=nan train/grad_norm=337.891
+[V25 PPO] phase=0 rollout/transitions=540672 safety/h_hard_min=4.91966 train/value_loss=995.785 train/value_explained_variance=0.397177 rollout/episode_return_std=nan train/grad_norm=326.217
+[V25 PPO] phase=0 rollout/transitions=544768 safety/h_hard_min=4.92109 train/value_loss=1051.16 train/value_explained_variance=0.386709 rollout/episode_return_std=nan train/grad_norm=337.608
+[V25 PPO] phase=0 rollout/transitions=548864 safety/h_hard_min=4.92012 train/value_loss=1027.09 train/value_explained_variance=0.381457 rollout/episode_return_std=nan train/grad_norm=325.545
+[V25 PPO] phase=0 rollout/transitions=552960 safety/h_hard_min=4.92626 train/value_loss=1056.53 train/value_explained_variance=0.381639 rollout/episode_return_std=nan train/grad_norm=335.329
+[V25 PPO] phase=0 rollout/transitions=557056 safety/h_hard_min=4.92174 train/value_loss=988.802 train/value_explained_variance=0.377008 rollout/episode_return_std=nan train/grad_norm=319.688
+[V25 PPO] phase=0 rollout/transitions=561152 safety/h_hard_min=4.92312 train/value_loss=1125.92 train/value_explained_variance=0.3264 rollout/episode_return_std=nan train/grad_norm=343.517
+[V25 PPO] phase=0 rollout/transitions=565248 safety/h_hard_min=4.92011 train/value_loss=983.431 train/value_explained_variance=0.403285 rollout/episode_return_std=nan train/grad_norm=318.681
+[V25 PPO] phase=0 rollout/transitions=569344 safety/h_hard_min=4.92448 train/value_loss=975.493 train/value_explained_variance=0.405056 rollout/episode_return_std=nan train/grad_norm=312.21
+[V25 PPO] phase=0 rollout/transitions=573440 safety/h_hard_min=4.92616 train/value_loss=935.424 train/value_explained_variance=0.392921 rollout/episode_return_std=nan train/grad_norm=304.125
+[V25 PPO] phase=0 rollout/transitions=577536 safety/h_hard_min=4.92478 train/value_loss=1049.07 train/value_explained_variance=0.367709 rollout/episode_return_std=nan train/grad_norm=325.113
+[V25 PPO] phase=0 rollout/transitions=581632 safety/h_hard_min=4.92461 train/value_loss=1006.89 train/value_explained_variance=0.384983 rollout/episode_return_std=nan train/grad_norm=322.565
+[V25 PPO] phase=0 rollout/transitions=585728 safety/h_hard_min=4.9261 train/value_loss=986.249 train/value_explained_variance=0.35169 rollout/episode_return_std=nan train/grad_norm=314.739
+[V25 PPO] phase=0 rollout/transitions=589824 safety/h_hard_min=4.92336 train/value_loss=934.77 train/value_explained_variance=0.416145 rollout/episode_return_std=nan train/grad_norm=307.481
+[V25 PPO] phase=0 rollout/transitions=593920 safety/h_hard_min=4.92389 train/value_loss=931.145 train/value_explained_variance=0.400346 rollout/episode_return_std=nan train/grad_norm=305.467
+[V25 PPO] phase=0 rollout/transitions=598016 safety/h_hard_min=4.92862 train/value_loss=1033.11 train/value_explained_variance=0.380245 rollout/episode_return_std=nan train/grad_norm=330.003
+[V25 PPO] phase=0 rollout/transitions=602112 safety/h_hard_min=4.92035 train/value_loss=1005.8 train/value_explained_variance=0.3796 rollout/episode_return_std=nan train/grad_norm=322.605
+[V25 PPO] phase=0 rollout/transitions=606208 safety/h_hard_min=4.92254 train/value_loss=970.615 train/value_explained_variance=0.395403 rollout/episode_return_std=nan train/grad_norm=317.029
+[V25 PPO] phase=0 rollout/transitions=610304 safety/h_hard_min=4.92291 train/value_loss=1071.7 train/value_explained_variance=0.366179 rollout/episode_return_std=nan train/grad_norm=327.741
+[V25 PPO] phase=0 rollout/transitions=614400 safety/h_hard_min=4.92793 train/value_loss=1024.49 train/value_explained_variance=0.38259 rollout/episode_return_std=nan train/grad_norm=319.447
+[V25 PPO] phase=0 rollout/transitions=618496 safety/h_hard_min=4.9242 train/value_loss=966.168 train/value_explained_variance=0.399227 rollout/episode_return_std=nan train/grad_norm=307.06
+[V25 PPO] phase=0 rollout/transitions=622592 safety/h_hard_min=4.92117 train/value_loss=842.9 train/value_explained_variance=0.470993 rollout/episode_return_std=nan train/grad_norm=295.883
+[V25 PPO] phase=0 rollout/transitions=626688 safety/h_hard_min=4.92196 train/value_loss=907.567 train/value_explained_variance=0.412864 rollout/episode_return_std=nan train/grad_norm=302.289
+[V25 PPO] phase=0 rollout/transitions=630784 safety/h_hard_min=4.92528 train/value_loss=980.094 train/value_explained_variance=0.379693 rollout/episode_return_std=nan train/grad_norm=313.502
+[V25 PPO] phase=0 rollout/transitions=634880 safety/h_hard_min=4.91985 train/value_loss=829.367 train/value_explained_variance=0.439638 rollout/episode_return_std=nan train/grad_norm=303.835
+[V25 PPO] phase=0 rollout/transitions=638976 safety/h_hard_min=4.9272 train/value_loss=884.544 train/value_explained_variance=0.422743 rollout/episode_return_std=nan train/grad_norm=297.059
+[V25 PPO] phase=0 rollout/transitions=643072 safety/h_hard_min=4.92151 train/value_loss=1017.09 train/value_explained_variance=0.401878 rollout/episode_return_std=nan train/grad_norm=321.169
+[V25 PPO] phase=0 rollout/transitions=647168 safety/h_hard_min=4.91987 train/value_loss=1025.81 train/value_explained_variance=0.376991 rollout/episode_return_std=nan train/grad_norm=319.875
+[V25 PPO] phase=0 rollout/transitions=651264 safety/h_hard_min=4.9253 train/value_loss=951.673 train/value_explained_variance=0.387047 rollout/episode_return_std=nan train/grad_norm=308.849
+[V25 PPO] phase=0 rollout/transitions=655360 safety/h_hard_min=4.91878 train/value_loss=996.738 train/value_explained_variance=0.398449 rollout/episode_return_std=nan train/grad_norm=310.405
+[V25 PPO] phase=0 rollout/transitions=659456 safety/h_hard_min=4.92262 train/value_loss=877.208 train/value_explained_variance=0.403192 rollout/episode_return_std=nan train/grad_norm=286.974
+[V25 PPO] phase=0 rollout/transitions=663552 safety/h_hard_min=4.92405 train/value_loss=828.141 train/value_explained_variance=0.443877 rollout/episode_return_std=nan train/grad_norm=287.721
+[V25 PPO] phase=0 rollout/transitions=667648 safety/h_hard_min=4.9254 train/value_loss=925.892 train/value_explained_variance=0.427008 rollout/episode_return_std=nan train/grad_norm=296.86
+[V25 PPO] phase=0 rollout/transitions=671744 safety/h_hard_min=4.92212 train/value_loss=926.536 train/value_explained_variance=0.439051 rollout/episode_return_std=nan train/grad_norm=303.157
+[V25 PPO] phase=0 rollout/transitions=675840 safety/h_hard_min=4.92473 train/value_loss=976.51 train/value_explained_variance=0.406188 rollout/episode_return_std=nan train/grad_norm=307.869
+[V25 PPO] phase=0 rollout/transitions=679936 safety/h_hard_min=4.92203 train/value_loss=916.281 train/value_explained_variance=0.425504 rollout/episode_return_std=nan train/grad_norm=298.572
+[V25 PPO] phase=0 rollout/transitions=684032 safety/h_hard_min=4.92704 train/value_loss=962.103 train/value_explained_variance=0.419803 rollout/episode_return_std=nan train/grad_norm=305.185
+[V25 PPO] phase=0 rollout/transitions=688128 safety/h_hard_min=4.92262 train/value_loss=846.454 train/value_explained_variance=0.411917 rollout/episode_return_std=nan train/grad_norm=283.587
+[V25 PPO] phase=0 rollout/transitions=692224 safety/h_hard_min=4.92297 train/value_loss=919.735 train/value_explained_variance=0.437086 rollout/episode_return_std=nan train/grad_norm=296.347
+[V25 PPO] phase=0 rollout/transitions=696320 safety/h_hard_min=4.92389 train/value_loss=961.815 train/value_explained_variance=0.406624 rollout/episode_return_std=nan train/grad_norm=318.747
+[V25 PPO] phase=0 rollout/transitions=700416 safety/h_hard_min=4.92322 train/value_loss=919.682 train/value_explained_variance=0.413816 rollout/episode_return_std=nan train/grad_norm=293.05
+[V25 PPO] phase=0 rollout/transitions=704512 safety/h_hard_min=4.92247 train/value_loss=865.574 train/value_explained_variance=0.447795 rollout/episode_return_std=nan train/grad_norm=291.182
+[V25 PPO] phase=0 rollout/transitions=708608 safety/h_hard_min=4.91805 train/value_loss=888.391 train/value_explained_variance=0.414506 rollout/episode_return_std=nan train/grad_norm=287.204
+[V25 PPO] phase=0 rollout/transitions=712704 safety/h_hard_min=4.92766 train/value_loss=829.33 train/value_explained_variance=0.452915 rollout/episode_return_std=nan train/grad_norm=287.236
+[V25 PPO] phase=0 rollout/transitions=716800 safety/h_hard_min=4.91632 train/value_loss=977.959 train/value_explained_variance=0.427429 rollout/episode_return_std=nan train/grad_norm=306.866
+[V25 PPO] phase=0 rollout/transitions=720896 safety/h_hard_min=4.92563 train/value_loss=1027.35 train/value_explained_variance=0.416243 rollout/episode_return_std=nan train/grad_norm=321.34
+[V25 PPO] phase=0 rollout/transitions=724992 safety/h_hard_min=4.92425 train/value_loss=936.125 train/value_explained_variance=0.420565 rollout/episode_return_std=nan train/grad_norm=300.148
+[V25 PPO] phase=0 rollout/transitions=729088 safety/h_hard_min=4.92485 train/value_loss=838.903 train/value_explained_variance=0.469448 rollout/episode_return_std=nan train/grad_norm=276.739
+[V25 PPO] phase=0 rollout/transitions=733184 safety/h_hard_min=4.9264 train/value_loss=875.756 train/value_explained_variance=0.463041 rollout/episode_return_std=nan train/grad_norm=284.194
+[V25 PPO] phase=0 rollout/transitions=737280 safety/h_hard_min=4.92666 train/value_loss=857.487 train/value_explained_variance=0.388964 rollout/episode_return_std=nan train/grad_norm=273.2
+[V25 PPO] phase=0 rollout/transitions=741376 safety/h_hard_min=4.9166 train/value_loss=771.627 train/value_explained_variance=0.471662 rollout/episode_return_std=nan train/grad_norm=260.901
+[V25 PPO] phase=0 rollout/transitions=745472 safety/h_hard_min=4.92553 train/value_loss=1015.36 train/value_explained_variance=0.439789 rollout/episode_return_std=nan train/grad_norm=317.758
+[V25 PPO] phase=0 rollout/transitions=749568 safety/h_hard_min=4.92488 train/value_loss=867.99 train/value_explained_variance=0.419777 rollout/episode_return_std=nan train/grad_norm=282.687
+[V25 PPO] phase=0 rollout/transitions=753664 safety/h_hard_min=4.92505 train/value_loss=762.978 train/value_explained_variance=0.45509 rollout/episode_return_std=nan train/grad_norm=275.253
+[V25 PPO] phase=0 rollout/transitions=757760 safety/h_hard_min=4.92244 train/value_loss=758.354 train/value_explained_variance=0.509403 rollout/episode_return_std=nan train/grad_norm=267.885
+[V25 PPO] phase=0 rollout/transitions=761856 safety/h_hard_min=4.91889 train/value_loss=890.631 train/value_explained_variance=0.466883 rollout/episode_return_std=nan train/grad_norm=293.358
+[V25 PPO] phase=0 rollout/transitions=765952 safety/h_hard_min=4.92005 train/value_loss=853.188 train/value_explained_variance=0.45583 rollout/episode_return_std=nan train/grad_norm=287.23
+[V25 PPO] phase=0 rollout/transitions=770048 safety/h_hard_min=4.92254 train/value_loss=840.036 train/value_explained_variance=0.485063 rollout/episode_return_std=nan train/grad_norm=279.786
+[V25 PPO] phase=0 rollout/transitions=774144 safety/h_hard_min=4.92601 train/value_loss=831.614 train/value_explained_variance=0.486769 rollout/episode_return_std=nan train/grad_norm=278.041
+[V25 PPO] phase=0 rollout/transitions=778240 safety/h_hard_min=4.9243 train/value_loss=922.439 train/value_explained_variance=0.453154 rollout/episode_return_std=nan train/grad_norm=299.013
+[V25 PPO] phase=0 rollout/transitions=782336 safety/h_hard_min=4.92423 train/value_loss=855.928 train/value_explained_variance=0.463466 rollout/episode_return_std=nan train/grad_norm=274.347
+[V25 PPO] phase=0 rollout/transitions=786432 safety/h_hard_min=4.9214 train/value_loss=855.53 train/value_explained_variance=0.452861 rollout/episode_return_std=nan train/grad_norm=281.259
+[V25 PPO] phase=0 rollout/transitions=790528 safety/h_hard_min=4.92536 train/value_loss=792.54 train/value_explained_variance=0.490534 rollout/episode_return_std=nan train/grad_norm=268.448
+[V25 PPO] phase=0 rollout/transitions=794624 safety/h_hard_min=4.9261 train/value_loss=905.568 train/value_explained_variance=0.434293 rollout/episode_return_std=nan train/grad_norm=291.62
+[V25 PPO] phase=0 rollout/transitions=798720 safety/h_hard_min=4.92513 train/value_loss=746.957 train/value_explained_variance=0.5049 rollout/episode_return_std=nan train/grad_norm=265.57
+[V25 PPO] phase=0 rollout/transitions=802816 safety/h_hard_min=4.92371 train/value_loss=777.755 train/value_explained_variance=0.527195 rollout/episode_return_std=nan train/grad_norm=265.247
+[V25 PPO] phase=0 rollout/transitions=806912 safety/h_hard_min=4.92094 train/value_loss=834.586 train/value_explained_variance=0.451641 rollout/episode_return_std=nan train/grad_norm=278.944
+[V25 PPO] phase=0 rollout/transitions=811008 safety/h_hard_min=4.92215 train/value_loss=931.139 train/value_explained_variance=0.425731 rollout/episode_return_std=nan train/grad_norm=295.61
+[V25 PPO] phase=0 rollout/transitions=815104 safety/h_hard_min=4.92226 train/value_loss=822.434 train/value_explained_variance=0.466335 rollout/episode_return_std=nan train/grad_norm=276.201
+[V25 PPO] phase=0 rollout/transitions=819200 safety/h_hard_min=4.92453 train/value_loss=846.959 train/value_explained_variance=0.433572 rollout/episode_return_std=nan train/grad_norm=282.439
+[V25 PPO] phase=0 rollout/transitions=823296 safety/h_hard_min=4.92235 train/value_loss=764.729 train/value_explained_variance=0.504548 rollout/episode_return_std=nan train/grad_norm=265.076
+[V25 PPO] phase=0 rollout/transitions=827392 safety/h_hard_min=4.92123 train/value_loss=811.744 train/value_explained_variance=0.455649 rollout/episode_return_std=nan train/grad_norm=270.203
+[V25 PPO] phase=0 rollout/transitions=831488 safety/h_hard_min=4.92423 train/value_loss=804.79 train/value_explained_variance=0.460862 rollout/episode_return_std=nan train/grad_norm=271.522
+[V25 PPO] phase=0 rollout/transitions=835584 safety/h_hard_min=4.92523 train/value_loss=873.644 train/value_explained_variance=0.419319 rollout/episode_return_std=nan train/grad_norm=285.175
+[V25 PPO] phase=0 rollout/transitions=839680 safety/h_hard_min=4.92681 train/value_loss=900.093 train/value_explained_variance=0.457797 rollout/episode_return_std=nan train/grad_norm=288.034
+[V25 PPO] phase=0 rollout/transitions=843776 safety/h_hard_min=4.91982 train/value_loss=745.416 train/value_explained_variance=0.475937 rollout/episode_return_std=nan train/grad_norm=252.728
+[V25 PPO] phase=0 rollout/transitions=847872 safety/h_hard_min=4.92398 train/value_loss=783.682 train/value_explained_variance=0.513583 rollout/episode_return_std=nan train/grad_norm=264.548
+[V25 PPO] phase=0 rollout/transitions=851968 safety/h_hard_min=4.92304 train/value_loss=786.207 train/value_explained_variance=0.489904 rollout/episode_return_std=nan train/grad_norm=271.789
+[V25 PPO] phase=0 rollout/transitions=856064 safety/h_hard_min=4.92381 train/value_loss=760.526 train/value_explained_variance=0.507074 rollout/episode_return_std=nan train/grad_norm=259.92
+[V25 PPO] phase=0 rollout/transitions=860160 safety/h_hard_min=4.9247 train/value_loss=796.734 train/value_explained_variance=0.475941 rollout/episode_return_std=nan train/grad_norm=262.064
+[V25 PPO] phase=0 rollout/transitions=864256 safety/h_hard_min=4.92451 train/value_loss=877.193 train/value_explained_variance=0.437765 rollout/episode_return_std=nan train/grad_norm=276.616
+[V25 PPO] phase=0 rollout/transitions=868352 safety/h_hard_min=4.925 train/value_loss=821.188 train/value_explained_variance=0.479719 rollout/episode_return_std=nan train/grad_norm=272.828
+[V25 PPO] phase=0 rollout/transitions=872448 safety/h_hard_min=4.92396 train/value_loss=755.804 train/value_explained_variance=0.480324 rollout/episode_return_std=nan train/grad_norm=256.804
+[V25 PPO] phase=0 rollout/transitions=876544 safety/h_hard_min=4.92206 train/value_loss=785.928 train/value_explained_variance=0.484089 rollout/episode_return_std=nan train/grad_norm=277.338
+[V25 PPO] phase=0 rollout/transitions=880640 safety/h_hard_min=4.92396 train/value_loss=677.398 train/value_explained_variance=0.525369 rollout/episode_return_std=nan train/grad_norm=243.94
+[V25 PPO] phase=0 rollout/transitions=884736 safety/h_hard_min=4.92572 train/value_loss=844.456 train/value_explained_variance=0.488458 rollout/episode_return_std=nan train/grad_norm=274.155
+[V25 PPO] phase=0 rollout/transitions=888832 safety/h_hard_min=4.92194 train/value_loss=708.949 train/value_explained_variance=0.512157 rollout/episode_return_std=nan train/grad_norm=248.364
+[V25 PPO] phase=0 rollout/transitions=892928 safety/h_hard_min=4.91987 train/value_loss=788.73 train/value_explained_variance=0.48354 rollout/episode_return_std=nan train/grad_norm=265.744
+[V25 PPO] phase=0 rollout/transitions=897024 safety/h_hard_min=4.9255 train/value_loss=678.807 train/value_explained_variance=0.502255 rollout/episode_return_std=nan train/grad_norm=239
+[V25 PPO] phase=0 rollout/transitions=901120 safety/h_hard_min=4.92471 train/value_loss=726.805 train/value_explained_variance=0.538824 rollout/episode_return_std=nan train/grad_norm=252.379
+[V25 PPO] phase=0 rollout/transitions=905216 safety/h_hard_min=4.92544 train/value_loss=762.667 train/value_explained_variance=0.477708 rollout/episode_return_std=nan train/grad_norm=254.988
+[V25 PPO] phase=0 rollout/transitions=909312 safety/h_hard_min=4.92494 train/value_loss=798.727 train/value_explained_variance=0.48052 rollout/episode_return_std=nan train/grad_norm=260.605
+[V25 PPO] phase=0 rollout/transitions=913408 safety/h_hard_min=4.9216 train/value_loss=711.203 train/value_explained_variance=0.5359 rollout/episode_return_std=nan train/grad_norm=249.964
+[V25 PPO] phase=0 rollout/transitions=917504 safety/h_hard_min=4.92378 train/value_loss=828.57 train/value_explained_variance=0.469856 rollout/episode_return_std=nan train/grad_norm=267.112
+[V25 PPO] phase=0 rollout/transitions=921600 safety/h_hard_min=4.92346 train/value_loss=708.326 train/value_explained_variance=0.528785 rollout/episode_return_std=nan train/grad_norm=249.966
+[V25 PPO] phase=0 rollout/transitions=925696 safety/h_hard_min=4.92237 train/value_loss=714.118 train/value_explained_variance=0.557404 rollout/episode_return_std=nan train/grad_norm=251.009
+[V25 PPO] phase=0 rollout/transitions=929792 safety/h_hard_min=4.92439 train/value_loss=740.766 train/value_explained_variance=0.5166 rollout/episode_return_std=nan train/grad_norm=259.744
+[V25 PPO] phase=0 rollout/transitions=933888 safety/h_hard_min=4.92571 train/value_loss=849.572 train/value_explained_variance=0.473383 rollout/episode_return_std=nan train/grad_norm=273.828
+[V25 PPO] phase=0 rollout/transitions=937984 safety/h_hard_min=4.92694 train/value_loss=713.829 train/value_explained_variance=0.499117 rollout/episode_return_std=nan train/grad_norm=241.208
+[V25 PPO] phase=0 rollout/transitions=942080 safety/h_hard_min=4.92464 train/value_loss=738.494 train/value_explained_variance=0.489011 rollout/episode_return_std=nan train/grad_norm=246.911
+[V25 PPO] phase=0 rollout/transitions=946176 safety/h_hard_min=4.92511 train/value_loss=747.329 train/value_explained_variance=0.499323 rollout/episode_return_std=nan train/grad_norm=249.935
+[V25 PPO] phase=0 rollout/transitions=950272 safety/h_hard_min=4.92544 train/value_loss=797.107 train/value_explained_variance=0.491887 rollout/episode_return_std=nan train/grad_norm=272.082
+[V25 PPO] phase=0 rollout/transitions=954368 safety/h_hard_min=4.92518 train/value_loss=648.12 train/value_explained_variance=0.546048 rollout/episode_return_std=nan train/grad_norm=234.082
+[V25 PPO] phase=0 rollout/transitions=958464 safety/h_hard_min=4.92112 train/value_loss=593.312 train/value_explained_variance=0.556326 rollout/episode_return_std=nan train/grad_norm=222.154
+[V25 PPO] phase=0 rollout/transitions=962560 safety/h_hard_min=4.92717 train/value_loss=668.146 train/value_explained_variance=0.563455 rollout/episode_return_std=nan train/grad_norm=237.985
+[V25 PPO] phase=0 rollout/transitions=966656 safety/h_hard_min=4.92513 train/value_loss=662.65 train/value_explained_variance=0.551317 rollout/episode_return_std=nan train/grad_norm=236.108
+[V25 PPO] phase=0 rollout/transitions=970752 safety/h_hard_min=4.92493 train/value_loss=705.798 train/value_explained_variance=0.488021 rollout/episode_return_std=nan train/grad_norm=240.718
+[V25 PPO] phase=0 rollout/transitions=974848 safety/h_hard_min=4.92336 train/value_loss=684.019 train/value_explained_variance=0.525433 rollout/episode_return_std=nan train/grad_norm=232.928
+[V25 PPO] phase=0 rollout/transitions=978944 safety/h_hard_min=4.92421 train/value_loss=658.516 train/value_explained_variance=0.53554 rollout/episode_return_std=nan train/grad_norm=236.808
+[V25 PPO] phase=0 rollout/transitions=983040 safety/h_hard_min=4.92355 train/value_loss=656.873 train/value_explained_variance=0.560573 rollout/episode_return_std=nan train/grad_norm=233.904
+[V25 PPO] phase=0 rollout/transitions=987136 safety/h_hard_min=4.92216 train/value_loss=733.562 train/value_explained_variance=0.514823 rollout/episode_return_std=nan train/grad_norm=246.207
+[V25 PPO] phase=0 rollout/transitions=991232 safety/h_hard_min=4.92442 train/value_loss=646.403 train/value_explained_variance=0.511797 rollout/episode_return_std=nan train/grad_norm=235.259
+[V25 PPO] phase=0 rollout/transitions=995328 safety/h_hard_min=4.92362 train/value_loss=670.527 train/value_explained_variance=0.562498 rollout/episode_return_std=nan train/grad_norm=236.419
+[V25 PPO] phase=0 rollout/transitions=999424 safety/h_hard_min=4.92347 train/value_loss=707.297 train/value_explained_variance=0.530114 rollout/episode_return_std=nan train/grad_norm=241.185
+[V25 PPO] phase=0 rollout/transitions=1003520 safety/h_hard_min=4.92351 train/value_loss=578.066 train/value_explained_variance=0.547611 rollout/episode_return_std=nan train/grad_norm=216.457
+[V25 PPO] phase=0 rollout/transitions=1007616 safety/h_hard_min=4.92476 train/value_loss=598.468 train/value_explained_variance=0.581797 rollout/episode_return_std=nan train/grad_norm=224.51
+[V25 PPO] phase=0 rollout/transitions=1011712 safety/h_hard_min=4.92193 train/value_loss=717.053 train/value_explained_variance=0.541284 rollout/episode_return_std=nan train/grad_norm=242.005
+[V25 PPO] phase=0 rollout/transitions=1015808 safety/h_hard_min=4.91958 train/value_loss=600.112 train/value_explained_variance=0.570875 rollout/episode_return_std=nan train/grad_norm=214.01
+[V25 PPO] phase=0 rollout/transitions=1019904 safety/h_hard_min=4.92183 train/value_loss=689.033 train/value_explained_variance=0.510901 rollout/episode_return_std=nan train/grad_norm=234.911
+[V25 PPO] phase=0 rollout/transitions=1024000 safety/h_hard_min=4.92628 train/value_loss=726.122 train/value_explained_variance=0.495895 rollout/episode_return_std=nan train/grad_norm=245.57
+[V25 PPO] phase=0 rollout/transitions=1028096 safety/h_hard_min=4.92769 train/value_loss=647.277 train/value_explained_variance=0.554875 rollout/episode_return_std=nan train/grad_norm=232.335
+[V25 PPO] phase=0 rollout/transitions=1032192 safety/h_hard_min=4.92463 train/value_loss=690.536 train/value_explained_variance=0.529187 rollout/episode_return_std=nan train/grad_norm=236.061
+[V25 PPO] phase=0 rollout/transitions=1036288 safety/h_hard_min=4.91872 train/value_loss=652.696 train/value_explained_variance=0.569613 rollout/episode_return_std=nan train/grad_norm=222.888
+[V25 PPO] phase=0 rollout/transitions=1040384 safety/h_hard_min=4.92076 train/value_loss=665.842 train/value_explained_variance=0.598352 rollout/episode_return_std=nan train/grad_norm=234.823
+[V25 PPO] phase=0 rollout/transitions=1044480 safety/h_hard_min=4.92584 train/value_loss=674.354 train/value_explained_variance=0.53635 rollout/episode_return_std=nan train/grad_norm=221.849
+[V25 PPO] phase=0 rollout/transitions=1048576 safety/h_hard_min=4.92357 train/value_loss=627.807 train/value_explained_variance=0.582567 rollout/episode_return_std=nan train/grad_norm=223.104
+[V25 PPO] phase=0 rollout/transitions=1052672 safety/h_hard_min=4.92042 train/value_loss=674.852 train/value_explained_variance=0.5595 rollout/episode_return_std=nan train/grad_norm=232.713
+[V25 PPO] phase=0 rollout/transitions=1056768 safety/h_hard_min=4.92622 train/value_loss=654.932 train/value_explained_variance=0.539919 rollout/episode_return_std=nan train/grad_norm=223.273
+[V25 PPO] phase=0 rollout/transitions=1060864 safety/h_hard_min=4.92445 train/value_loss=561.292 train/value_explained_variance=0.576759 rollout/episode_return_std=nan train/grad_norm=206.019
+[V25 PPO] phase=0 rollout/transitions=1064960 safety/h_hard_min=4.92128 train/value_loss=689.153 train/value_explained_variance=0.519432 rollout/episode_return_std=nan train/grad_norm=225.623
+[V25 PPO] phase=0 rollout/transitions=1069056 safety/h_hard_min=4.92472 train/value_loss=661.887 train/value_explained_variance=0.559683 rollout/episode_return_std=nan train/grad_norm=225.371
+[V25 PPO] phase=0 rollout/transitions=1073152 safety/h_hard_min=4.92335 train/value_loss=630.418 train/value_explained_variance=0.573624 rollout/episode_return_std=nan train/grad_norm=220.889
+[V25 PPO] phase=0 rollout/transitions=1077248 safety/h_hard_min=4.925 train/value_loss=709.218 train/value_explained_variance=0.526823 rollout/episode_return_std=nan train/grad_norm=245.046
+[V25 PPO] phase=0 rollout/transitions=1081344 safety/h_hard_min=4.92639 train/value_loss=633.987 train/value_explained_variance=0.545741 rollout/episode_return_std=nan train/grad_norm=224.316
+[V25 PPO] phase=0 rollout/transitions=1085440 safety/h_hard_min=4.92258 train/value_loss=504.767 train/value_explained_variance=0.624536 rollout/episode_return_std=nan train/grad_norm=192.525
+[V25 PPO] phase=0 rollout/transitions=1089536 safety/h_hard_min=4.92209 train/value_loss=564.473 train/value_explained_variance=0.567994 rollout/episode_return_std=nan train/grad_norm=203.012
+[V25 PPO] phase=0 rollout/transitions=1093632 safety/h_hard_min=4.92281 train/value_loss=614.855 train/value_explained_variance=0.563623 rollout/episode_return_std=nan train/grad_norm=216.075
+[V25 PPO] phase=0 rollout/transitions=1097728 safety/h_hard_min=4.92615 train/value_loss=638.097 train/value_explained_variance=0.52766 rollout/episode_return_std=nan train/grad_norm=216.443
+[V25 PPO] phase=0 rollout/transitions=1101824 safety/h_hard_min=4.92563 train/value_loss=613.008 train/value_explained_variance=0.607016 rollout/episode_return_std=nan train/grad_norm=218.417
+[V25 PPO] phase=0 rollout/transitions=1105920 safety/h_hard_min=4.92113 train/value_loss=643.948 train/value_explained_variance=0.591635 rollout/episode_return_std=nan train/grad_norm=227.006
+[V25 PPO] phase=0 rollout/transitions=1110016 safety/h_hard_min=4.92199 train/value_loss=611.169 train/value_explained_variance=0.587277 rollout/episode_return_std=nan train/grad_norm=213.349
+[V25 PPO] phase=0 rollout/transitions=1114112 safety/h_hard_min=4.92645 train/value_loss=614.616 train/value_explained_variance=0.571798 rollout/episode_return_std=nan train/grad_norm=211.213
+[V25 PPO] phase=0 rollout/transitions=1118208 safety/h_hard_min=4.92493 train/value_loss=580.613 train/value_explained_variance=0.570683 rollout/episode_return_std=nan train/grad_norm=206.639
+[V25 PPO] phase=0 rollout/transitions=1122304 safety/h_hard_min=4.92243 train/value_loss=622.269 train/value_explained_variance=0.581579 rollout/episode_return_std=nan train/grad_norm=213.235
+[V25 PPO] phase=0 rollout/transitions=1126400 safety/h_hard_min=4.92348 train/value_loss=640.883 train/value_explained_variance=0.544401 rollout/episode_return_std=nan train/grad_norm=216.788
+[V25 PPO] phase=0 rollout/transitions=1130496 safety/h_hard_min=4.92461 train/value_loss=732.074 train/value_explained_variance=0.538585 rollout/episode_return_std=nan train/grad_norm=227.26
+[V25 PPO] phase=0 rollout/transitions=1134592 safety/h_hard_min=4.92445 train/value_loss=491.374 train/value_explained_variance=0.603819 rollout/episode_return_std=nan train/grad_norm=181.72
+[V25 PPO] phase=0 rollout/transitions=1138688 safety/h_hard_min=4.92412 train/value_loss=578.263 train/value_explained_variance=0.587246 rollout/episode_return_std=nan train/grad_norm=210.628
+[V25 PPO] phase=0 rollout/transitions=1142784 safety/h_hard_min=4.9216 train/value_loss=578.034 train/value_explained_variance=0.581167 rollout/episode_return_std=nan train/grad_norm=205.935
+[V25 PPO] phase=0 rollout/transitions=1146880 safety/h_hard_min=4.92129 train/value_loss=621.062 train/value_explained_variance=0.560424 rollout/episode_return_std=nan train/grad_norm=212.711
+[V25 PPO] phase=0 rollout/transitions=1150976 safety/h_hard_min=4.928 train/value_loss=520.235 train/value_explained_variance=0.647983 rollout/episode_return_std=nan train/grad_norm=194.499
+[V25 PPO] phase=0 rollout/transitions=1155072 safety/h_hard_min=4.92673 train/value_loss=611.956 train/value_explained_variance=0.584638 rollout/episode_return_std=nan train/grad_norm=210.273
+[V25 PPO] phase=0 rollout/transitions=1159168 safety/h_hard_min=4.92271 train/value_loss=594.604 train/value_explained_variance=0.587605 rollout/episode_return_std=nan train/grad_norm=205.465
+[V25 PPO] phase=0 rollout/transitions=1163264 safety/h_hard_min=4.92423 train/value_loss=536.652 train/value_explained_variance=0.600315 rollout/episode_return_std=nan train/grad_norm=190.476
+[V25 PPO] phase=0 rollout/transitions=1167360 safety/h_hard_min=4.92438 train/value_loss=605.604 train/value_explained_variance=0.578501 rollout/episode_return_std=nan train/grad_norm=214.74
+[V25 PPO] phase=0 rollout/transitions=1171456 safety/h_hard_min=4.92642 train/value_loss=601.789 train/value_explained_variance=0.56636 rollout/episode_return_std=nan train/grad_norm=202.022
+[V25 PPO] phase=0 rollout/transitions=1175552 safety/h_hard_min=4.92443 train/value_loss=586.476 train/value_explained_variance=0.562183 rollout/episode_return_std=nan train/grad_norm=207.283
+[V25 PPO] phase=0 rollout/transitions=1179648 safety/h_hard_min=4.92523 train/value_loss=572.175 train/value_explained_variance=0.609488 rollout/episode_return_std=nan train/grad_norm=208.051
+[V25 PPO] phase=0 rollout/transitions=1183744 safety/h_hard_min=4.92426 train/value_loss=593.942 train/value_explained_variance=0.567316 rollout/episode_return_std=nan train/grad_norm=200.725
+[V25 PPO] phase=0 rollout/transitions=1187840 safety/h_hard_min=4.9222 train/value_loss=618.945 train/value_explained_variance=0.591429 rollout/episode_return_std=nan train/grad_norm=216.051
+[V25 PPO] phase=0 rollout/transitions=1191936 safety/h_hard_min=4.92484 train/value_loss=611.942 train/value_explained_variance=0.562744 rollout/episode_return_std=nan train/grad_norm=208.199
+[V25 PPO] phase=0 rollout/transitions=1196032 safety/h_hard_min=4.92445 train/value_loss=603.508 train/value_explained_variance=0.590979 rollout/episode_return_std=nan train/grad_norm=204.307
+[V25 PPO] phase=0 rollout/transitions=1200128 safety/h_hard_min=4.92382 train/value_loss=547.61 train/value_explained_variance=0.591494 rollout/episode_return_std=nan train/grad_norm=191.048
+[V25 PPO] phase=0 rollout/transitions=1204224 safety/h_hard_min=4.91974 train/value_loss=568.154 train/value_explained_variance=0.582281 rollout/episode_return_std=nan train/grad_norm=197.545
+[V25 PPO] phase=0 rollout/transitions=1208320 safety/h_hard_min=4.92404 train/value_loss=539.302 train/value_explained_variance=0.589335 rollout/episode_return_std=nan train/grad_norm=183.559
+[V25 PPO] phase=0 rollout/transitions=1212416 safety/h_hard_min=4.92382 train/value_loss=559.373 train/value_explained_variance=0.604754 rollout/episode_return_std=nan train/grad_norm=197.246
+[V25 PPO] phase=0 rollout/transitions=1216512 safety/h_hard_min=4.92569 train/value_loss=529.85 train/value_explained_variance=0.571544 rollout/episode_return_std=nan train/grad_norm=182.498
+[V25 PPO] phase=0 rollout/transitions=1220608 safety/h_hard_min=4.925 train/value_loss=486.927 train/value_explained_variance=0.613288 rollout/episode_return_std=nan train/grad_norm=185.849
+[V25 PPO] phase=0 rollout/transitions=1224704 safety/h_hard_min=4.92478 train/value_loss=545.961 train/value_explained_variance=0.606842 rollout/episode_return_std=nan train/grad_norm=191.008
+[V25 PPO] phase=0 rollout/transitions=1228800 safety/h_hard_min=4.92322 train/value_loss=504.251 train/value_explained_variance=0.638468 rollout/episode_return_std=nan train/grad_norm=187.862
+[V25 PPO] phase=0 rollout/transitions=1232896 safety/h_hard_min=4.92541 train/value_loss=584.558 train/value_explained_variance=0.562916 rollout/episode_return_std=nan train/grad_norm=198.768
+[V25 PPO] phase=0 rollout/transitions=1236992 safety/h_hard_min=4.9239 train/value_loss=482.314 train/value_explained_variance=0.627976 rollout/episode_return_std=nan train/grad_norm=176.723
+[V25 PPO] phase=0 rollout/transitions=1241088 safety/h_hard_min=4.9225 train/value_loss=573.598 train/value_explained_variance=0.594299 rollout/episode_return_std=nan train/grad_norm=203.157
+[V25 PPO] phase=0 rollout/transitions=1245184 safety/h_hard_min=4.9237 train/value_loss=508.413 train/value_explained_variance=0.60108 rollout/episode_return_std=nan train/grad_norm=180.46
+[V25 PPO] phase=0 rollout/transitions=1249280 safety/h_hard_min=4.92517 train/value_loss=432.135 train/value_explained_variance=0.649402 rollout/episode_return_std=nan train/grad_norm=161.184
+[V25 PPO] phase=0 rollout/transitions=1253376 safety/h_hard_min=4.92658 train/value_loss=450.589 train/value_explained_variance=0.617743 rollout/episode_return_std=nan train/grad_norm=165.755
+[V25 PPO] phase=0 rollout/transitions=1257472 safety/h_hard_min=4.92194 train/value_loss=573.308 train/value_explained_variance=0.558773 rollout/episode_return_std=nan train/grad_norm=181.932
+[V25 PPO] phase=0 rollout/transitions=1261568 safety/h_hard_min=4.92345 train/value_loss=548.803 train/value_explained_variance=0.602789 rollout/episode_return_std=nan train/grad_norm=187.153
+[V25 PPO] phase=0 rollout/transitions=1265664 safety/h_hard_min=4.92374 train/value_loss=557.471 train/value_explained_variance=0.609748 rollout/episode_return_std=nan train/grad_norm=191.822
+[V25 PPO] phase=0 rollout/transitions=1269760 safety/h_hard_min=4.92327 train/value_loss=506.877 train/value_explained_variance=0.63985 rollout/episode_return_std=nan train/grad_norm=180.98
+[V25 PPO] phase=0 rollout/transitions=1273856 safety/h_hard_min=4.92493 train/value_loss=497.114 train/value_explained_variance=0.618543 rollout/episode_return_std=nan train/grad_norm=173.232
+[V25 PPO] phase=0 rollout/transitions=1277952 safety/h_hard_min=4.9251 train/value_loss=483.707 train/value_explained_variance=0.645564 rollout/episode_return_std=nan train/grad_norm=171
+[V25 PPO] phase=0 rollout/transitions=1282048 safety/h_hard_min=4.92124 train/value_loss=482.261 train/value_explained_variance=0.614444 rollout/episode_return_std=nan train/grad_norm=171.396
+[V25 PPO] phase=0 rollout/transitions=1286144 safety/h_hard_min=4.9231 train/value_loss=547.268 train/value_explained_variance=0.593871 rollout/episode_return_std=nan train/grad_norm=191.035
+[V25 PPO] phase=0 rollout/transitions=1290240 safety/h_hard_min=4.92601 train/value_loss=562.215 train/value_explained_variance=0.62133 rollout/episode_return_std=nan train/grad_norm=195.534
+[V25 PPO] phase=0 rollout/transitions=1294336 safety/h_hard_min=4.92565 train/value_loss=437.844 train/value_explained_variance=0.635056 rollout/episode_return_std=nan train/grad_norm=155.864
+[V25 PPO] phase=0 rollout/transitions=1298432 safety/h_hard_min=4.92252 train/value_loss=571.341 train/value_explained_variance=0.625719 rollout/episode_return_std=nan train/grad_norm=191.687
+[V25 PPO] phase=0 rollout/transitions=1302528 safety/h_hard_min=4.92605 train/value_loss=519.327 train/value_explained_variance=0.58868 rollout/episode_return_std=nan train/grad_norm=170.197
+[V25 PPO] phase=0 rollout/transitions=1306624 safety/h_hard_min=4.92451 train/value_loss=417.333 train/value_explained_variance=0.652161 rollout/episode_return_std=nan train/grad_norm=153.959
+[V25 PPO] phase=0 rollout/transitions=1310720 safety/h_hard_min=4.92484 train/value_loss=509.043 train/value_explained_variance=0.613925 rollout/episode_return_std=nan train/grad_norm=166.519
+[V25 PPO] phase=0 rollout/transitions=1314816 safety/h_hard_min=4.92746 train/value_loss=498.155 train/value_explained_variance=0.6088 rollout/episode_return_std=nan train/grad_norm=182.84
+[V25 PPO] phase=0 rollout/transitions=1318912 safety/h_hard_min=4.91992 train/value_loss=507.062 train/value_explained_variance=0.603249 rollout/episode_return_std=nan train/grad_norm=169.612
+[V25 PPO] phase=0 rollout/transitions=1323008 safety/h_hard_min=4.92256 train/value_loss=454.693 train/value_explained_variance=0.685535 rollout/episode_return_std=nan train/grad_norm=165.205
+[V25 PPO] phase=0 rollout/transitions=1327104 safety/h_hard_min=4.92268 train/value_loss=448.211 train/value_explained_variance=0.689727 rollout/episode_return_std=nan train/grad_norm=173.93
+[V25 PPO] phase=0 rollout/transitions=1331200 safety/h_hard_min=4.92452 train/value_loss=490.098 train/value_explained_variance=0.62951 rollout/episode_return_std=nan train/grad_norm=170.269
+[V25 PPO] phase=0 rollout/transitions=1335296 safety/h_hard_min=4.92527 train/value_loss=443.243 train/value_explained_variance=0.607604 rollout/episode_return_std=nan train/grad_norm=155.546
+[V25 PPO] phase=0 rollout/transitions=1339392 safety/h_hard_min=4.92301 train/value_loss=474.508 train/value_explained_variance=0.658857 rollout/episode_return_std=nan train/grad_norm=167.747
+[V25 PPO] phase=0 rollout/transitions=1343488 safety/h_hard_min=4.921 train/value_loss=545.206 train/value_explained_variance=0.624161 rollout/episode_return_std=nan train/grad_norm=182.502
+[V25 PPO] phase=0 rollout/transitions=1347584 safety/h_hard_min=4.92179 train/value_loss=536.241 train/value_explained_variance=0.635373 rollout/episode_return_std=nan train/grad_norm=180.046
+[V25 PPO] phase=0 rollout/transitions=1351680 safety/h_hard_min=4.92111 train/value_loss=453.012 train/value_explained_variance=0.665074 rollout/episode_return_std=nan train/grad_norm=158.86
+[V25 PPO] phase=0 rollout/transitions=1355776 safety/h_hard_min=4.92435 train/value_loss=423.267 train/value_explained_variance=0.671845 rollout/episode_return_std=nan train/grad_norm=156.758
+[V25 PPO] phase=0 rollout/transitions=1359872 safety/h_hard_min=4.92693 train/value_loss=443.059 train/value_explained_variance=0.659814 rollout/episode_return_std=nan train/grad_norm=157.836
+[V25 PPO] phase=0 rollout/transitions=1363968 safety/h_hard_min=4.92357 train/value_loss=407.603 train/value_explained_variance=0.689267 rollout/episode_return_std=nan train/grad_norm=152.551
+[V25 PPO] phase=0 rollout/transitions=1368064 safety/h_hard_min=4.92213 train/value_loss=540.674 train/value_explained_variance=0.627199 rollout/episode_return_std=nan train/grad_norm=177.331
+[V25 PPO] phase=0 rollout/transitions=1372160 safety/h_hard_min=4.9258 train/value_loss=446.988 train/value_explained_variance=0.657268 rollout/episode_return_std=nan train/grad_norm=161.28
+[V25 PPO] phase=0 rollout/transitions=1376256 safety/h_hard_min=4.92387 train/value_loss=355.078 train/value_explained_variance=0.703866 rollout/episode_return_std=nan train/grad_norm=132.876
+[V25 PPO] phase=0 rollout/transitions=1380352 safety/h_hard_min=4.92426 train/value_loss=474.321 train/value_explained_variance=0.654369 rollout/episode_return_std=nan train/grad_norm=162.884
+[V25 PPO] phase=0 rollout/transitions=1384448 safety/h_hard_min=4.92088 train/value_loss=464.458 train/value_explained_variance=0.686056 rollout/episode_return_std=nan train/grad_norm=165.702
+[V25 PPO] phase=0 rollout/transitions=1388544 safety/h_hard_min=4.92301 train/value_loss=521.827 train/value_explained_variance=0.629244 rollout/episode_return_std=nan train/grad_norm=169.709
+[V25 PPO] phase=0 rollout/transitions=1392640 safety/h_hard_min=4.92218 train/value_loss=420.596 train/value_explained_variance=0.676337 rollout/episode_return_std=nan train/grad_norm=145.733
+[V25 PPO] phase=0 rollout/transitions=1396736 safety/h_hard_min=4.92231 train/value_loss=470.73 train/value_explained_variance=0.654408 rollout/episode_return_std=nan train/grad_norm=160.353
+[V25 PPO] phase=0 rollout/transitions=1400832 safety/h_hard_min=4.927 train/value_loss=490.435 train/value_explained_variance=0.638992 rollout/episode_return_std=nan train/grad_norm=159.21
+[V25 PPO] phase=0 rollout/transitions=1404928 safety/h_hard_min=4.92312 train/value_loss=387.196 train/value_explained_variance=0.670456 rollout/episode_return_std=nan train/grad_norm=126.042
+[V25 PPO] phase=0 rollout/transitions=1409024 safety/h_hard_min=4.92502 train/value_loss=370.004 train/value_explained_variance=0.698021 rollout/episode_return_std=nan train/grad_norm=132.012
+[V25 PPO] phase=0 rollout/transitions=1413120 safety/h_hard_min=4.92503 train/value_loss=418.856 train/value_explained_variance=0.664781 rollout/episode_return_std=nan train/grad_norm=141.648
+[V25 PPO] phase=0 rollout/transitions=1417216 safety/h_hard_min=4.92667 train/value_loss=409.921 train/value_explained_variance=0.683908 rollout/episode_return_std=nan train/grad_norm=146.443
+[V25 PPO] phase=0 rollout/transitions=1421312 safety/h_hard_min=4.92584 train/value_loss=347.285 train/value_explained_variance=0.679543 rollout/episode_return_std=nan train/grad_norm=122.947
+[V25 PPO] phase=0 rollout/transitions=1425408 safety/h_hard_min=4.92616 train/value_loss=450.419 train/value_explained_variance=0.661539 rollout/episode_return_std=nan train/grad_norm=151.059
+[V25 PPO] phase=0 rollout/transitions=1429504 safety/h_hard_min=4.92437 train/value_loss=450.569 train/value_explained_variance=0.667499 rollout/episode_return_std=nan train/grad_norm=154.742
+[V25 PPO] phase=0 rollout/transitions=1433600 safety/h_hard_min=4.92592 train/value_loss=327.189 train/value_explained_variance=0.720507 rollout/episode_return_std=nan train/grad_norm=120.313
+[V25 PPO] phase=0 rollout/transitions=1437696 safety/h_hard_min=4.92163 train/value_loss=399.413 train/value_explained_variance=0.677274 rollout/episode_return_std=nan train/grad_norm=146.639
+[V25 PPO] phase=0 rollout/transitions=1441792 safety/h_hard_min=4.91929 train/value_loss=415.306 train/value_explained_variance=0.672368 rollout/episode_return_std=nan train/grad_norm=137.588
+[V25 PPO] phase=0 rollout/transitions=1445888 safety/h_hard_min=4.92213 train/value_loss=382.481 train/value_explained_variance=0.682879 rollout/episode_return_std=nan train/grad_norm=127.942
+[V25 PPO] phase=0 rollout/transitions=1449984 safety/h_hard_min=4.92346 train/value_loss=464.746 train/value_explained_variance=0.665249 rollout/episode_return_std=nan train/grad_norm=163.679
+[V25 PPO] phase=0 rollout/transitions=1454080 safety/h_hard_min=4.92522 train/value_loss=444.517 train/value_explained_variance=0.65558 rollout/episode_return_std=nan train/grad_norm=143.483
+[V25 PPO] phase=0 rollout/transitions=1458176 safety/h_hard_min=4.92578 train/value_loss=434.148 train/value_explained_variance=0.684826 rollout/episode_return_std=nan train/grad_norm=142.543
+[V25 PPO] phase=0 rollout/transitions=1462272 safety/h_hard_min=4.92194 train/value_loss=384.162 train/value_explained_variance=0.669063 rollout/episode_return_std=nan train/grad_norm=132.969
+[V25 PPO] phase=0 rollout/transitions=1466368 safety/h_hard_min=4.92255 train/value_loss=410.842 train/value_explained_variance=0.655882 rollout/episode_return_std=nan train/grad_norm=140.177
+[V25 PPO] phase=0 rollout/transitions=1470464 safety/h_hard_min=4.92501 train/value_loss=428.595 train/value_explained_variance=0.678365 rollout/episode_return_std=nan train/grad_norm=149.614
+[V25 PPO] phase=0 rollout/transitions=1474560 safety/h_hard_min=4.92139 train/value_loss=423.091 train/value_explained_variance=0.66015 rollout/episode_return_std=nan train/grad_norm=142.766
+[V25 PPO] phase=0 rollout/transitions=1478656 safety/h_hard_min=4.92651 train/value_loss=350.99 train/value_explained_variance=0.73154 rollout/episode_return_std=nan train/grad_norm=122.681
+[V25 PPO] phase=0 rollout/transitions=1482752 safety/h_hard_min=4.92355 train/value_loss=366.352 train/value_explained_variance=0.712549 rollout/episode_return_std=nan train/grad_norm=126.86
+[V25 PPO] phase=0 rollout/transitions=1486848 safety/h_hard_min=4.92412 train/value_loss=379.133 train/value_explained_variance=0.708142 rollout/episode_return_std=nan train/grad_norm=135.394
+[V25 PPO] phase=0 rollout/transitions=1490944 safety/h_hard_min=4.92216 train/value_loss=387.668 train/value_explained_variance=0.687307 rollout/episode_return_std=nan train/grad_norm=127.73
+[V25 PPO] phase=0 rollout/transitions=1495040 safety/h_hard_min=4.92336 train/value_loss=414.239 train/value_explained_variance=0.688452 rollout/episode_return_std=nan train/grad_norm=134.519
+[V25 PPO] phase=0 rollout/transitions=1499136 safety/h_hard_min=4.92154 train/value_loss=307.14 train/value_explained_variance=0.742824 rollout/episode_return_std=nan train/grad_norm=112.351
+[V25 PPO] phase=0 rollout/transitions=1503232 safety/h_hard_min=4.92588 train/value_loss=319.749 train/value_explained_variance=0.731097 rollout/episode_return_std=nan train/grad_norm=114.966
+[HALT][V25] reason=watchdog halt
+wandb: 
+wandb: Run history:
+wandb:                 critic_warmup_active ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:                  critic_warmup_steps ▁▁▁▁▂▂▂▂▂▂▂▂▂▂▃▃▃▃▄▄▄▄▄▄▄▅▅▅▅▆▇▇▇▇▇▇▇███
+wandb:                          elapsed_sec ▁▁▁▁▂▂▂▂▃▃▃▃▃▃▄▄▄▅▅▅▅▅▅▅▆▆▆▆▇▇▇▇▇▇▇█████
+wandb:         episode_return_zero_variance ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:    explained_variance_stuck_negative ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:                            grad_norm █▇▇▇▇▆▆▆▆▆▆▆▅▆▅▅▅▄▄▅▄▃▃▃▄▃▃▃▃▃▂▂▂▂▁▂▂▂▁▁
+wandb:                                phase ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb: rollout/arena_projection_active_rate ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:              rollout/cbf_active_rate █████████████████████████████████▁██████
+wandb:  rollout/cbf_arena_projection_active ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:                                  +37 ...
+wandb: 
+wandb: Run summary:
+wandb:                 critic_warmup_active 0
+wandb:                  critic_warmup_steps 1503232
+wandb:                          elapsed_sec 538.88857
+wandb:         episode_return_zero_variance 0
+wandb:    explained_variance_stuck_negative 0
+wandb:                            grad_norm 114.96648
+wandb:                                phase 0
+wandb:                           phase_name critic_warmup
+wandb: rollout/arena_projection_active_rate 0.53125
+wandb:              rollout/cbf_active_rate 0.53125
+wandb:                                  +38 ...
+wandb: 
+wandb: You can sync this run to the cloud by running:
+wandb: wandb sync /data/uav_project/ParallelCBF/runs/v02_attempt2_20260502T114503Z/wandb/wandb/offline-run-20260502_194506-9tqenbqc
+wandb: Find logs at: ./runs/v02_attempt2_20260502T114503Z/wandb/wandb/offline-run-20260502_194506-9tqenbqc/logs

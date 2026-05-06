@@ -1,0 +1,66 @@
+output_dir=/data/uav_project/ParallelCBF/runs/v02_gate_v2_resume_smoke2_20260502T121614Z
+tb_logdir=/data/uav_project/ParallelCBF/runs/v02_gate_v2_resume_smoke2_20260502T121614Z/tb
+pre_registration_manifest_sha256=04239083e521976faa6fa109bd5624296af0c8a69c037da2f52703424f58d88d
+bc_checkpoint_sha256=40c70226bbae24e2bce4c00878fd31173337fb4e411b7f45107a71198f5719e0
+bc_dataset_sha256=50e59d2f7886dcc00f3c2405ae449cdbaa879b1b5be79b7dcd2993ce65bb5145
+resume_from=/data/uav_project/ParallelCBF/runs/v02_attempt2_20260502T114503Z/checkpoints/last_safe_step.pt
+============================================================
+WATCHDOG REGISTRY (V25 PPO training):
+  - Train Loss Explosion: metric=train_loss, threshold=1000000.0, when=>
+  - Grad Norm Blowup: metric=grad_norm, threshold=10000.0, when=>
+  - Val Overfit: metric=val_overfit_ratio, threshold=5.0, when=>
+  - critic_warmup_did_not_converge: metric=phase, threshold=1500000, when=sustained_phase
+  - value_loss_increasing: metric=value_loss_slope, threshold=0.0, when=>
+  - episode_return_zero_variance: metric=episode_return_zero_variance, threshold=0.5, when=>
+  - explained_variance_stuck_negative: metric=explained_variance_stuck_negative, threshold=0.5, when=>
+  - arena_projection_saturation: metric=arena_projection_active_rate, threshold=0.5, when=>
+============================================================
+[INFO][V25] phase=0 (CRITIC_WARMUP) entered cleanly
+/data/IsaacLab/_isaac_sim/exts/omni.isaac.ml_archive/pip_prebundle/torch/_weights_only_unpickler.py:549: UserWarning: Detected pickle protocol 5 in the checkpoint, which was not the default pickle protocol used by `torch.load` (2). The weights_only Unpickler might not support all instructions implemented by this protocol, please file an issue for adding support if you encounter this.
+  warnings.warn(
+[RESUME][V25] seeded_gate_v2_history=True samples=49 latest_step=1503232 ev_sustain_start_step=1306624
+[RESUME][V25] restored optimizer_state_dict=False reason=legacy_checkpoint_missing_optimizer_state
+[RESUME][V25] start_transitions=1503232 phase=critic_warmup global_step=1503232
+loaded_actor_parameters=3167235
+[INFO][V25] algo.learn entry reached
+wandb: WARNING The anonymous setting has no effect and will be removed in a future version.
+wandb: Tracking run with wandb version 0.26.1
+wandb: W&B syncing is set to `offline` in this directory. Run `wandb online` or set WANDB_MODE=online to enable cloud syncing.
+wandb: Run data is saved locally in /data/uav_project/ParallelCBF/runs/v02_gate_v2_resume_smoke2_20260502T121614Z/wandb/wandb/offline-run-20260502_201617-v52280ad
+wandb: WARNING URL not available in offline run
+wandb_status=initialized mode=offline url=unavailable
+tensorboard_status=initialized logdir=/data/uav_project/ParallelCBF/runs/v02_gate_v2_resume_smoke2_20260502T121614Z/tb
+[V25] phase transition: critic_warmup -> full_ppo global_step=1507328 ev=0.647888 ev_slope_100k=2.7114e-07
+[V25 PPO] phase=1 rollout/transitions=1507328 safety/h_hard_min=4.92418 train/value_loss=174.283 train/value_explained_variance=0.710397 rollout/episode_return_std=nan train/grad_norm=1028.26
+[V25 PPO] phase=1 rollout/transitions=1511424 safety/h_hard_min=4.88441 train/value_loss=135.635 train/value_explained_variance=0.822149 rollout/episode_return_std=nan train/grad_norm=242.173
+wandb: 
+wandb: Run history:
+wandb:                 critic_warmup_active ▁▁
+wandb:                  critic_warmup_steps ▁▁
+wandb:                          elapsed_sec ▁█
+wandb:         episode_return_zero_variance ▁▁
+wandb:    explained_variance_stuck_negative ▁▁
+wandb:                            grad_norm █▁
+wandb:                                phase ▁▁
+wandb: rollout/arena_projection_active_rate █▁
+wandb:              rollout/cbf_active_rate █▁
+wandb:  rollout/cbf_arena_projection_active ▁▁
+wandb:                                  +37 ...
+wandb: 
+wandb: Run summary:
+wandb:                 critic_warmup_active 1
+wandb:                  critic_warmup_steps 0
+wandb:                          elapsed_sec 4.66295
+wandb:         episode_return_zero_variance 0
+wandb:    explained_variance_stuck_negative 0
+wandb:                            grad_norm 242.1734
+wandb:                                phase 1
+wandb:                           phase_name ppo
+wandb: rollout/arena_projection_active_rate 0.51685
+wandb:              rollout/cbf_active_rate 0.51685
+wandb:                                  +38 ...
+wandb: 
+wandb: You can sync this run to the cloud by running:
+wandb: wandb sync /data/uav_project/ParallelCBF/runs/v02_gate_v2_resume_smoke2_20260502T121614Z/wandb/wandb/offline-run-20260502_201617-v52280ad
+wandb: Find logs at: ./runs/v02_gate_v2_resume_smoke2_20260502T121614Z/wandb/wandb/offline-run-20260502_201617-v52280ad/logs
+[DONE][V25] training complete

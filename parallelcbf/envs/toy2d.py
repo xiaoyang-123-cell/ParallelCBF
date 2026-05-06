@@ -13,6 +13,7 @@ from parallelcbf.api import ConstraintViolations, MetricDict, SafeEnv, SafetySta
 
 
 ArrayF32 = NDArray[np.float32]
+FAR_OBSTACLE_THRESHOLD_M = np.float32(50.0)
 
 
 @dataclass(frozen=True, slots=True)
@@ -56,6 +57,7 @@ class Toy2DAvoidanceEnv(SafeEnv[ArrayF32, ArrayF32]):
         self._goal: ArrayF32 = cast(ArrayF32, np.array([2.0, 0.0], dtype=np.float32))
         self._obstacle: ArrayF32 = cast(ArrayF32, np.array([0.8, 0.0], dtype=np.float32))
         self._last_hard_violation = False
+        self._last_termination_reason: str | None = None
         self.last_observation = self._observation()
 
     def reset(
@@ -75,6 +77,7 @@ class Toy2DAvoidanceEnv(SafeEnv[ArrayF32, ArrayF32]):
         self._goal = cast(ArrayF32, np.array([2.0, 0.0], dtype=np.float32))
         self._obstacle = cast(ArrayF32, np.array([0.4, 0.25], dtype=np.float32))
         self._last_hard_violation = False
+        self._last_termination_reason = None
         self.last_observation = self._observation()
         return self.last_observation, {"safety_metrics": dict(self.safety_metrics())}
 
@@ -88,16 +91,34 @@ class Toy2DAvoidanceEnv(SafeEnv[ArrayF32, ArrayF32]):
         self._pos = (self._pos + self._vel * np.float32(self.config.dt)).astype(np.float32)
         self._step_count += 1
 
-        obstacle_clearance = self._obstacle_clearance()
-        arena_clearance = self.config.arena_radius - float(np.linalg.norm(self._pos))
-        self._last_hard_violation = obstacle_clearance < 0.0 or arena_clearance < 0.0
+        collision = self._is_collision_with_real_obstacle()
+        out_of_arena = self._is_out_of_arena()
         dist_to_goal = float(np.linalg.norm(self._goal - self._pos))
-        terminated = dist_to_goal <= self.config.goal_radius or self._last_hard_violation
-        truncated = self._step_count >= self.config.max_steps
+        success = dist_to_goal <= self.config.goal_radius
+        terminated = collision or out_of_arena or success
+        truncated = self._step_count >= self.config.max_steps and not terminated
+        timeout = truncated
+        self._last_hard_violation = collision or out_of_arena
         reward = -dist_to_goal - (10.0 if self._last_hard_violation else 0.0)
+        if success:
+            termination_reason: str | None = "success"
+        elif collision:
+            termination_reason = "collision"
+        elif out_of_arena:
+            termination_reason = "out_of_arena"
+        elif timeout:
+            termination_reason = "timeout"
+        else:
+            termination_reason = None
+        self._last_termination_reason = termination_reason
         info = {
             "safety_metrics": dict(self.safety_metrics()),
             "hard_constraint_violations": dict(self.hard_constraint_violations()),
+            "termination_reason": termination_reason,
+            "collision": bool(collision),
+            "out_of_arena": bool(out_of_arena),
+            "success": bool(success),
+            "timeout": bool(timeout),
         }
         self.last_observation = self._observation()
         return self.last_observation, float(reward), bool(terminated), bool(truncated), info
@@ -136,7 +157,13 @@ class Toy2DAvoidanceEnv(SafeEnv[ArrayF32, ArrayF32]):
     def hard_constraint_violations(self) -> ConstraintViolations:
         """Return hard safety flags."""
 
-        return {"collision_or_oob": self._last_hard_violation}
+        collision = self._is_collision_with_real_obstacle()
+        out_of_arena = self._is_out_of_arena()
+        return {
+            "collision_or_oob": collision or out_of_arena,
+            "collision": collision,
+            "out_of_arena": out_of_arena,
+        }
 
     def render(self) -> None:
         """Rendering is intentionally omitted for the minimal API proof."""
@@ -149,3 +176,12 @@ class Toy2DAvoidanceEnv(SafeEnv[ArrayF32, ArrayF32]):
     def _obstacle_clearance(self) -> float:
         combined_radius = self.config.robot_radius + self.config.obstacle_radius
         return float(np.linalg.norm(self._pos - self._obstacle) - combined_radius)
+
+    def _is_collision_with_real_obstacle(self) -> bool:
+        obstacle = np.asarray(self._obstacle, dtype=np.float32).reshape(2)
+        if float(np.linalg.norm(obstacle)) > float(FAR_OBSTACLE_THRESHOLD_M):
+            return False
+        return self._obstacle_clearance() < 0.0
+
+    def _is_out_of_arena(self) -> bool:
+        return float(np.linalg.norm(self._pos)) > float(self.config.arena_radius)

@@ -65,11 +65,11 @@ class NaiveDistanceCBF(SafetyFilter[ArrayF32, ArrayF32]):
         """Project a 2D acceleration onto the one-step hard-safe set."""
 
         _ = observation
-        action = cast(ArrayF32, np.asarray(nominal_action, dtype=np.float32).reshape(2))
-        action = cast(ArrayF32, np.clip(action, -self.config.action_limit, self.config.action_limit).astype(np.float32))
-        pos = cast(ArrayF32, np.asarray(safety_state.position, dtype=np.float32).reshape(2))
-        vel = cast(ArrayF32, np.asarray(safety_state.velocity, dtype=np.float32).reshape(2))
-        obstacles = cast(ArrayF32, np.asarray(safety_state.obstacles, dtype=np.float32).reshape(-1, 2))
+        action = np.asarray(nominal_action, dtype=np.float32).reshape(2)
+        action = np.clip(action, -self.config.action_limit, self.config.action_limit).astype(np.float32)
+        pos = np.asarray(safety_state.position, dtype=np.float32).reshape(2)
+        vel = np.asarray(safety_state.velocity, dtype=np.float32).reshape(2)
+        obstacles = np.asarray(safety_state.obstacles, dtype=np.float32).reshape(-1, 2)
         hard_radius = float(safety_state.robot_radius + safety_state.obstacle_radius)
         safe_action: ArrayF32 = action.copy()
         modified = False

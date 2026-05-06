@@ -1,0 +1,22 @@
+{
+  "delta_collision": 0,
+  "delta_out_of_arena": -125,
+  "delta_success": 0,
+  "delta_timeout": 125,
+  "scope": "first 125 deterministic single_static episodes",
+  "v0_1_stage0_reference": {
+    "episodes": 125,
+    "total_collision": 0,
+    "total_out_of_arena": 125,
+    "total_success": 0,
+    "total_timeout": 0
+  },
+  "v0_2_observed": {
+    "episodes": 125,
+    "total_collision": 0,
+    "total_layer2_violation": 0,
+    "total_out_of_arena": 0,
+    "total_success": 0,
+    "total_timeout": 125
+  }
+}

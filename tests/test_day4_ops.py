@@ -18,9 +18,11 @@ from parallelcbf.ops import (
     DefaultWatchdogRegistry,
     FailureForensics,
     JsonPreRegistration,
+    ParseError,
     ThresholdWatchdog,
     V24Telemetry,
 )
+from parallelcbf.ops.preregistration import load_preregistration_artifact
 
 
 def test_watchdog_registry_triggers() -> None:
@@ -140,6 +142,61 @@ def test_preregistration_evaluates_registered_specs(tmp_path: Path) -> None:
     report = prereg.evaluate({"success_rate": 0.72})
     assert report.status == "PASS"
     assert report.results == {"success_floor": True}
+
+
+def test_preregistration_missing_metric_raises_parse_error() -> None:
+    prereg = JsonPreRegistration()
+    prereg.add_spec(
+        PreRegistrationSpec(
+            name="val_overfit_guard",
+            hypothesis="Validation overfit ratio is present and bounded.",
+            metric_name="val_overfit_ratio",
+            threshold=5.0,
+            comparison="le",
+            sample_size=1,
+        )
+    )
+    with pytest.raises(ParseError, match="missing required metric"):
+        prereg.evaluate({"train_loss": 0.1})
+
+
+def test_preregistration_nonfinite_metric_raises_parse_error() -> None:
+    prereg = JsonPreRegistration()
+    prereg.add_spec(
+        PreRegistrationSpec(
+            name="finite_val_loss",
+            hypothesis="Validation loss is finite.",
+            metric_name="val_loss",
+            threshold=1.0,
+            comparison="lt",
+            sample_size=1,
+        )
+    )
+    with pytest.raises(ParseError, match="must be finite"):
+        prereg.evaluate({"val_loss": float("inf")})
+
+
+def test_load_preregistration_artifact_missing_spec_field_raises_parse_error(tmp_path: Path) -> None:
+    artifact = tmp_path / "broken_prereg.json"
+    artifact.write_text(
+        json.dumps(
+            {
+                "committed_at": "2026-05-01T00:00:00+00:00",
+                "specs": [
+                    {
+                        "name": "broken",
+                        "hypothesis": "missing metric name",
+                        "threshold": 1.0,
+                        "comparison": "lt",
+                        "sample_size": 1,
+                    }
+                ],
+            }
+        ),
+        encoding="utf-8",
+    )
+    with pytest.raises(ParseError, match="missing field: metric_name"):
+        load_preregistration_artifact(artifact)
 
 
 def test_failure_forensics_keeps_rolling_window_and_dumps(tmp_path: Path) -> None:

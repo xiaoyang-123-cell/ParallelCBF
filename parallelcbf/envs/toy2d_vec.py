@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Any
+from typing import Any, cast
 
 import numpy as np
 from numpy.typing import NDArray
@@ -28,6 +28,7 @@ class Toy2DAvoidanceVecEnv:
         self._goal = np.broadcast_to(np.array([2.0, 0.0], dtype=np.float32), (num_envs, 2)).copy()
         self._obstacle = np.broadcast_to(np.array([0.4, 0.25], dtype=np.float32), (num_envs, 2)).copy()
         self._last_hard_violation = np.zeros((num_envs,), dtype=np.bool_)
+        self._last_termination_reason: list[str | None] = [None] * num_envs
 
     def reset(self, *, seed: int | None = None) -> tuple[ArrayF32, dict[str, Any]]:
         """Reset all vectorized environments."""
@@ -39,6 +40,7 @@ class Toy2DAvoidanceVecEnv:
         self._goal[:, :] = np.array([2.0, 0.0], dtype=np.float32)
         self._obstacle[:, :] = np.array([0.4, 0.25], dtype=np.float32)
         self._last_hard_violation.fill(False)
+        self._last_termination_reason = [None] * self.num_envs
         return self._observation(), {"safety_metrics": self.safety_metrics()}
 
     def step(self, actions: ArrayF32) -> tuple[ArrayF32, ArrayF32, BoolArray, BoolArray, dict[str, Any]]:
@@ -53,16 +55,32 @@ class Toy2DAvoidanceVecEnv:
         self._pos = (self._pos + self._vel * dt).astype(np.float32)
         self._step_count += 1
 
-        obstacle_clearance = self._obstacle_clearance()
-        arena_clearance = self.config.arena_radius - np.linalg.norm(self._pos, axis=1)
-        self._last_hard_violation = np.logical_or(obstacle_clearance < 0.0, arena_clearance < 0.0)
+        collision = self._is_collision_with_real_obstacle()
+        out_of_arena = self._is_out_of_arena()
         dist_to_goal = np.linalg.norm(self._goal - self._pos, axis=1)
-        terminated = np.logical_or(dist_to_goal <= self.config.goal_radius, self._last_hard_violation)
-        truncated = self._step_count >= self.config.max_steps
+        success = dist_to_goal <= self.config.goal_radius
+        terminated = np.logical_or.reduce((success, collision, out_of_arena))
+        truncated = np.logical_and(self._step_count >= self.config.max_steps, np.logical_not(terminated))
+        self._last_hard_violation = np.logical_or(collision, out_of_arena)
         rewards = (-dist_to_goal - np.where(self._last_hard_violation, 10.0, 0.0)).astype(np.float32)
+        termination_reason = np.full((self.num_envs,), None, dtype=object)
+        termination_reason[success] = "success"
+        termination_reason[np.logical_and(np.logical_not(success), collision)] = "collision"
+        termination_reason[np.logical_and(np.logical_not(success), np.logical_and(np.logical_not(collision), out_of_arena))] = "out_of_arena"
+        termination_reason[np.logical_and(np.logical_not(terminated), truncated)] = "timeout"
+        self._last_termination_reason = [cast(str | None, value) for value in termination_reason.tolist()]
         info = {
             "safety_metrics": self.safety_metrics(),
-            "hard_constraint_violations": {"collision_or_oob": self._last_hard_violation.copy()},
+            "hard_constraint_violations": {
+                "collision_or_oob": self._last_hard_violation.copy(),
+                "collision": collision.copy(),
+                "out_of_arena": out_of_arena.copy(),
+            },
+            "termination_reason": termination_reason.tolist(),
+            "collision": collision.copy(),
+            "out_of_arena": out_of_arena.copy(),
+            "success": success.copy(),
+            "timeout": truncated.copy(),
         }
         return self._observation(), rewards, terminated.astype(np.bool_), truncated.astype(np.bool_), info
 
@@ -82,3 +100,10 @@ class Toy2DAvoidanceVecEnv:
     def _obstacle_clearance(self) -> ArrayF32:
         combined_radius = np.float32(self.config.robot_radius + self.config.obstacle_radius)
         return np.asarray(np.linalg.norm(self._pos - self._obstacle, axis=1) - combined_radius, dtype=np.float32)
+
+    def _is_collision_with_real_obstacle(self) -> BoolArray:
+        obstacle_is_real = np.linalg.norm(self._obstacle, axis=1) <= np.float32(50.0)
+        return np.asarray(np.logical_and(self._obstacle_clearance() < 0.0, obstacle_is_real), dtype=np.bool_)
+
+    def _is_out_of_arena(self) -> BoolArray:
+        return np.asarray(np.linalg.norm(self._pos, axis=1) > np.float32(self.config.arena_radius), dtype=np.bool_)

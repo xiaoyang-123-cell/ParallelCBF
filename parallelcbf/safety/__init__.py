@@ -7,6 +7,7 @@ from parallelcbf.safety.dual_barrier import (
     NaiveDistanceCBF,
     NaiveDistanceCBFConfig,
 )
+from parallelcbf.safety.triple_barrier_cbf import TripleBarrierCBF, TripleBarrierCBFConfig
 
 __all__ = [
     "ChanceConstrainedDualBarrierCBF",
@@ -14,4 +15,6 @@ __all__ = [
     "DualBarrierCBFConfig",
     "NaiveDistanceCBF",
     "NaiveDistanceCBFConfig",
+    "TripleBarrierCBF",
+    "TripleBarrierCBFConfig",
 ]

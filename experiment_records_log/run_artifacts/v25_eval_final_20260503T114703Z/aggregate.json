@@ -1,0 +1,359 @@
+{
+  "artifacts": {
+    "manifest": "manifest.json",
+    "per_episode": "per_episode.jsonl",
+    "stage0_comparison": "stage0_comparison.json",
+    "trajectories_dir": "trajectories",
+    "value_calibration": "value_calibration.json"
+  },
+  "by_mode": {
+    "deterministic": {
+      "episodes": 500,
+      "mean_final_distance": 3.1207915532588957,
+      "mean_steps": 500.0,
+      "success_rate": 0.0,
+      "success_rate_wilson_95": {
+        "high": 0.007624340461552241,
+        "low": 4.336808689942018e-19
+      },
+      "successes": 0,
+      "termination_counts": {
+        "collision": 0,
+        "layer2_violation": 0,
+        "out_of_arena": 0,
+        "success": 0,
+        "timeout": 500
+      }
+    },
+    "stochastic": {
+      "episodes": 100,
+      "mean_final_distance": 4.598571858406067,
+      "mean_steps": 500.0,
+      "success_rate": 0.0,
+      "success_rate_wilson_95": {
+        "high": 0.03699349820698568,
+        "low": 3.469446951953614e-18
+      },
+      "successes": 0,
+      "termination_counts": {
+        "collision": 0,
+        "layer2_violation": 0,
+        "out_of_arena": 0,
+        "success": 0,
+        "timeout": 100
+      }
+    }
+  },
+  "by_scene": {
+    "near_goal_open": {
+      "episodes": 75,
+      "mean_final_distance": 4.283482551574707,
+      "mean_steps": 500.0,
+      "success_rate": 0.0,
+      "success_rate_wilson_95": {
+        "high": 0.04872384248280587,
+        "low": 0.0
+      },
+      "successes": 0,
+      "termination_counts": {
+        "collision": 0,
+        "layer2_violation": 0,
+        "out_of_arena": 0,
+        "success": 0,
+        "timeout": 75
+      }
+    },
+    "offset_single_static": {
+      "episodes": 125,
+      "mean_final_distance": 2.2018896341323853,
+      "mean_steps": 500.0,
+      "success_rate": 0.0,
+      "success_rate_wilson_95": {
+        "high": 0.029815393708326456,
+        "low": 1.734723475976807e-18
+      },
+      "successes": 0,
+      "termination_counts": {
+        "collision": 0,
+        "layer2_violation": 0,
+        "out_of_arena": 0,
+        "success": 0,
+        "timeout": 125
+      }
+    },
+    "open": {
+      "episodes": 225,
+      "mean_final_distance": 4.618933024936252,
+      "mean_steps": 500.0,
+      "success_rate": 0.0,
+      "success_rate_wilson_95": {
+        "high": 0.016786551005620237,
+        "low": 1.734723475976807e-18
+      },
+      "successes": 0,
+      "termination_counts": {
+        "collision": 0,
+        "layer2_violation": 0,
+        "out_of_arena": 0,
+        "success": 0,
+        "timeout": 225
+      }
+    },
+    "single_static": {
+      "episodes": 125,
+      "mean_final_distance": 2.1664888858795166,
+      "mean_steps": 500.0,
+      "success_rate": 0.0,
+      "success_rate_wilson_95": {
+        "high": 0.029815393708326456,
+        "low": 1.734723475976807e-18
+      },
+      "successes": 0,
+      "termination_counts": {
+        "collision": 0,
+        "layer2_violation": 0,
+        "out_of_arena": 0,
+        "success": 0,
+        "timeout": 125
+      }
+    },
+    "wide_single_static": {
+      "episodes": 50,
+      "mean_final_distance": 2.2736905097961424,
+      "mean_steps": 500.0,
+      "success_rate": 0.0,
+      "success_rate_wilson_95": {
+        "high": 0.07134759913335872,
+        "low": 6.938893903907228e-18
+      },
+      "successes": 0,
+      "termination_counts": {
+        "collision": 0,
+        "layer2_violation": 0,
+        "out_of_arena": 0,
+        "success": 0,
+        "timeout": 50
+      }
+    }
+  },
+  "layer2_residuals": {
+    "by_barrier": {
+      "h_arena": {
+        "maximum_negative_excursion": 0.0,
+        "min_value": 0.0,
+        "numerical_residual_count": 0,
+        "violations_above_tolerance": 0
+      },
+      "h_arena_stopping": {
+        "maximum_negative_excursion": -2.2747553884983063e-07,
+        "min_value": -2.2747553884983063e-07,
+        "numerical_residual_count": 22576,
+        "violations_above_tolerance": 0
+      },
+      "h_hard": {
+        "maximum_negative_excursion": 0.0,
+        "min_value": 1.0316863059997559,
+        "numerical_residual_count": 0,
+        "violations_above_tolerance": 0
+      },
+      "h_soft": {
+        "maximum_negative_excursion": 0.0,
+        "min_value": 0.41093939542770386,
+        "numerical_residual_count": 0,
+        "violations_above_tolerance": 0
+      }
+    },
+    "tolerance_threshold": -1e-05,
+    "total_numerical_residuals": 22576,
+    "violations_above_tolerance": 0
+  },
+  "mean_final_distance": 3.3670882707834244,
+  "mean_steps": 500.0,
+  "min_h_arena": 0.0,
+  "min_h_arena_stopping": -2.2747553884983063e-07,
+  "min_h_hard": 1.0316863059997559,
+  "min_h_soft": 0.41093939542770386,
+  "paired_det_stoch": {
+    "both_fail": 100,
+    "both_success": 0,
+    "det_only_success": 0,
+    "examples": [
+      {
+        "deterministic_reason": "timeout",
+        "deterministic_success": false,
+        "paired_id": 0,
+        "scene": "open",
+        "stochastic_reason": "timeout",
+        "stochastic_success": false
+      },
+      {
+        "deterministic_reason": "timeout",
+        "deterministic_success": false,
+        "paired_id": 1,
+        "scene": "open",
+        "stochastic_reason": "timeout",
+        "stochastic_success": false
+      },
+      {
+        "deterministic_reason": "timeout",
+        "deterministic_success": false,
+        "paired_id": 2,
+        "scene": "open",
+        "stochastic_reason": "timeout",
+        "stochastic_success": false
+      },
+      {
+        "deterministic_reason": "timeout",
+        "deterministic_success": false,
+        "paired_id": 3,
+        "scene": "open",
+        "stochastic_reason": "timeout",
+        "stochastic_success": false
+      },
+      {
+        "deterministic_reason": "timeout",
+        "deterministic_success": false,
+        "paired_id": 4,
+        "scene": "open",
+        "stochastic_reason": "timeout",
+        "stochastic_success": false
+      },
+      {
+        "deterministic_reason": "timeout",
+        "deterministic_success": false,
+        "paired_id": 5,
+        "scene": "open",
+        "stochastic_reason": "timeout",
+        "stochastic_success": false
+      },
+      {
+        "deterministic_reason": "timeout",
+        "deterministic_success": false,
+        "paired_id": 6,
+        "scene": "open",
+        "stochastic_reason": "timeout",
+        "stochastic_success": false
+      },
+      {
+        "deterministic_reason": "timeout",
+        "deterministic_success": false,
+        "paired_id": 7,
+        "scene": "open",
+        "stochastic_reason": "timeout",
+        "stochastic_success": false
+      },
+      {
+        "deterministic_reason": "timeout",
+        "deterministic_success": false,
+        "paired_id": 8,
+        "scene": "open",
+        "stochastic_reason": "timeout",
+        "stochastic_success": false
+      },
+      {
+        "deterministic_reason": "timeout",
+        "deterministic_success": false,
+        "paired_id": 9,
+        "scene": "open",
+        "stochastic_reason": "timeout",
+        "stochastic_success": false
+      },
+      {
+        "deterministic_reason": "timeout",
+        "deterministic_success": false,
+        "paired_id": 10,
+        "scene": "open",
+        "stochastic_reason": "timeout",
+        "stochastic_success": false
+      },
+      {
+        "deterministic_reason": "timeout",
+        "deterministic_success": false,
+        "paired_id": 11,
+        "scene": "open",
+        "stochastic_reason": "timeout",
+        "stochastic_success": false
+      },
+      {
+        "deterministic_reason": "timeout",
+        "deterministic_success": false,
+        "paired_id": 12,
+        "scene": "open",
+        "stochastic_reason": "timeout",
+        "stochastic_success": false
+      },
+      {
+        "deterministic_reason": "timeout",
+        "deterministic_success": false,
+        "paired_id": 13,
+        "scene": "open",
+        "stochastic_reason": "timeout",
+        "stochastic_success": false
+      },
+      {
+        "deterministic_reason": "timeout",
+        "deterministic_success": false,
+        "paired_id": 14,
+        "scene": "open",
+        "stochastic_reason": "timeout",
+        "stochastic_success": false
+      },
+      {
+        "deterministic_reason": "timeout",
+        "deterministic_success": false,
+        "paired_id": 15,
+        "scene": "open",
+        "stochastic_reason": "timeout",
+        "stochastic_success": false
+      },
+      {
+        "deterministic_reason": "timeout",
+        "deterministic_success": false,
+        "paired_id": 16,
+        "scene": "open",
+        "stochastic_reason": "timeout",
+        "stochastic_success": false
+      },
+      {
+        "deterministic_reason": "timeout",
+        "deterministic_success": false,
+        "paired_id": 17,
+        "scene": "open",
+        "stochastic_reason": "timeout",
+        "stochastic_success": false
+      },
+      {
+        "deterministic_reason": "timeout",
+        "deterministic_success": false,
+        "paired_id": 18,
+        "scene": "open",
+        "stochastic_reason": "timeout",
+        "stochastic_success": false
+      },
+      {
+        "deterministic_reason": "timeout",
+        "deterministic_success": false,
+        "paired_id": 19,
+        "scene": "open",
+        "stochastic_reason": "timeout",
+        "stochastic_success": false
+      }
+    ],
+    "pairs": 100,
+    "stoch_only_success": 0
+  },
+  "success_rate": 0.0,
+  "success_rate_wilson_95": {
+    "high": 0.006361701013700711,
+    "low": 0.0
+  },
+  "successes": 0,
+  "termination_counts": {
+    "collision": 0,
+    "layer2_violation": 0,
+    "out_of_arena": 0,
+    "success": 0,
+    "timeout": 600
+  },
+  "total_episodes": 600
+}
